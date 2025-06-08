@@ -23,8 +23,7 @@
             <a href="#" class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md">About</a>
           </div>
           <div class="hidden lg:flex space-x-4 items-center">
-          <a href="./others/login.html"><button class="btn btn-outline text-xl">Login</button></a>
-            <button class="btn btn-primary bg-red-800 text-white text-xl hover:bg-red-900">Sign Up</button>
+            <a href="./signup.html"><button class="btn btn-primary bg-red-800 text-white text-xl hover:bg-red-900">Sign Up</button></a>
           </div>
   
           <!-- Mobile menu button -->
@@ -44,22 +43,34 @@
         <a href="#" class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base">Home</a>
         <a href="#" class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base">Features</a>
         <a href="#" class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base">About</a>
-        <button class="btn btn-outline w-full text-xl">Login</button>
         <button class="btn btn-primary w-full bg-red-800 text-xl text-white">Sign Up</button>
       </div>
     </nav>
-    <div class="hero bg-gray-250 min-h-screen">
-        <div class="hero-content flex-col lg:flex-row-reverse w-auto ">
+    <div class="hero bg-red-900 min-h-screen">
+        <div class="hero-content flex-col lg:flex-row-reverse gap-50 ">
+            <div class="flex-col">
+                
+              <img src="../utilities/logo.png" alt="" class="max-w-sm rounded-lg m-5 mb-10">
+
+              <div>
+                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-auto h-xl border p-4">
+                    <h1 class="text-xl font-bold text-blue-950">Login</h1>
+                  
+                    <label class="label">Email</label>
+                    <input type="email" class="input w-auto" placeholder="Email" />
+                  
+                    <label class="label">Password</label>
+                    <input type="password" class="input w-auto" placeholder="Password" />
+                  
+                    <button class="btn btn-neutral mt-4 w-auto bg-blue-950">Login</button>
+                  </fieldset>
+              </div>
+            </div>
+
           <img
-            src="./image.png"
-            class="max-w-sm rounded-lg"
-          />
-          <div>
-            <h1 class="text-8xl font-bold text-indigo-950">Your Student Note-Taking App</h1>
-            <p class="py-6 text-xl w-3/4 text-indigo-950">Welcome to MetroNotes- Your digital notebook tailored for students at Metropolitan University
-            </p>
-            <button class="btn btn-primary bg-blue-950 p-5 text-lg text-white font-bold  hover:bg-blue-900 rounded-lg">Get Started</button>
-          </div>
+          src="../image.png"
+          class="max-w-sm rounded-lg"
+        />
         </div>
       </div>
   

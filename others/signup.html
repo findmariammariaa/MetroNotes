@@ -8,7 +8,7 @@
   </head>
   <body class="bg-gray-100" >
 
-    <nav class="bg-gray-400 shadow-lg sticky top-0">
+    <nav class="bg-gray-400 shadow-lg ">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
         <div class="flex justify-between items-center p-4">
           <!-- Logo -->
@@ -18,13 +18,13 @@
   
           <!-- Desktop Menu -->
           <div class="hidden lg:flex space-x-4 items-center">
-            <a href="#" class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md">Home</a>
-            <a href="#" class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md">Features</a>
-            <a href="#" class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md">About</a>
+            <a href="../index.html" class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md">Home</a>
+            <a href="../index.html" class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md">Features</a>
+            <a href="../index.html" class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md">About</a>
           </div>
           <div class="hidden lg:flex space-x-4 items-center">
-          <a href="./others/login.html"><button class="btn btn-outline text-xl">Login</button></a>
-            <button class="btn btn-primary bg-red-800 text-white text-xl hover:bg-red-900">Sign Up</button>
+            <a href="./login.html">
+              <button class="btn btn-primary bg-red-800 text-white text-xl hover:bg-red-900">Login</button></a>
           </div>
   
           <!-- Mobile menu button -->
@@ -44,22 +44,41 @@
         <a href="#" class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base">Home</a>
         <a href="#" class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base">Features</a>
         <a href="#" class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base">About</a>
-        <button class="btn btn-outline w-full text-xl">Login</button>
-        <button class="btn btn-primary w-full bg-red-800 text-xl text-white">Sign Up</button>
+        <button class="btn btn-primary w-full bg-red-800 text-xl text-white">Login</button>
       </div>
     </nav>
-    <div class="hero bg-gray-250 min-h-screen">
-        <div class="hero-content flex-col lg:flex-row-reverse w-auto ">
-          <img
-            src="./image.png"
-            class="max-w-sm rounded-lg"
-          />
+    <div class="hero bg-blue-950 min-h-screen">
+        <div class="hero-content flex-col lg:flex-row-reverse gap-50 ">
           <div>
-            <h1 class="text-8xl font-bold text-indigo-950">Your Student Note-Taking App</h1>
-            <p class="py-6 text-xl w-3/4 text-indigo-950">Welcome to MetroNotes- Your digital notebook tailored for students at Metropolitan University
-            </p>
-            <button class="btn btn-primary bg-blue-950 p-5 text-lg text-white font-bold  hover:bg-blue-900 rounded-lg">Get Started</button>
-          </div>
+          <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-lg h-xl border p-4">
+            <h1 class="text-xl font-bold text-red-900">Sign Up</h1>
+          
+            <label class="label">Full Name</label>
+            <input type="full-name" class="input w-auto" placeholder="Name" />
+            <label class="label">ID</label>
+            <input type="number" class="input w-auto" placeholder="ID" />
+            <label class="label">Email</label>
+            <input type="email" class="input w-auto" placeholder="Email" />
+            <label class="label">Phone</label>
+            <input type="number" class="input w-auto" placeholder="Phone" />
+            <label class="label">Password</label>
+            <input type="password" class="input w-auto" placeholder="Password" />
+            <label class="label">Confirm Password</label>
+            <input type="password" class="input w-auto" placeholder="Confirm Password" />
+            <button class="btn btn-neutral mt-4 w-auto bg-red-900">SignUp</button>
+          </fieldset>
+      </div>
+      <div class="flex-col">
+                
+        <img src="../utilities/logo.png" alt="" class="max-w-sm rounded-lg">
+
+
+  <img
+  src="../image.png"
+  class="max-w-sm rounded-lg"
+/>
+      </div>
+
         </div>
       </div>
   

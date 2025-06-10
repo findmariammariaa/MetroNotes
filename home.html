@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | MetroNotes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <!-- ✅ White Navbar -->
+    <div class="navbar bg-gray-400 shadow px-4 md:px-10 sticky top-0 z-50">
+      <div class="flex-1">
+        <a href="index.html" class="text-3xl font-bold text-indigo-950"
+          >MetroNotes</a
+        >
+      </div>
+      <div class="flex-none space-x-4 items-center">
+        <a class="btn btn-ghost text-md">Browse Notes</a>
+        <a class="btn btn-ghost text-md">Upload Notes</a>
+        <a
+          href="./others/login.html"
+          class="btn btn-md font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-md"
+          >Log in</a
+        >
+      </div>
+    </div>
+
+    <!-- ✅ Hero Section -->
+    <section class="text-center px-4 py-16 max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to MetroNotes</h1>
+      <p class="text-lg mb-6">
+        A note-sharing platform for Metropolitan University students across all
+        departments.
+      </p>
+
+      <!-- Search Bar -->
+      <div
+        class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-6"
+      >
+        <input
+          type="text"
+          placeholder="Search notes by department or course"
+          class="input input-bordered w-full max-w-md text-black bg-white placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <button class="btn btn-primary w-full sm:w-auto">Search</button>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-2">
+        <button class="btn bg-green-500 text-white hover:bg-green-600">
+          Upload Notes
+        </button>
+        <button class="btn bg-blue-600 text-white hover:bg-blue-700">
+          Browse Notes
+        </button>
+      </div>
+    </section>
+
+    <!-- ✅ Updated "Browse by Department" Section -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
+        Browse by Department
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- CSE -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios-filled/50/1e40af/laptop-coding.png"
+            class="w-12 h-12 mb-4"
+            alt="CSE"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Computer Science & Engineering
+          </p>
+        </div>
+
+        <!-- EEE -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/electrical.png"
+            class="w-12 h-12 mb-4"
+            alt="EEE"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Electrical & Electronic Engineering
+          </p>
+        </div>
+
+        <!-- BBA -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/business.png"
+            class="w-12 h-12 mb-4"
+            alt="BBA"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Business Administration
+          </p>
+        </div>
+
+        <!-- English -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/book.png"
+            class="w-12 h-12 mb-4"
+            alt="English"
+          />
+          <p class="text-md font-semibold text-gray-800">English</p>
+        </div>
+
+        <!-- Law -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/scales.png"
+            class="w-12 h-12 mb-4"
+            alt="Law"
+          />
+          <p class="text-md font-semibold text-gray-800">Law</p>
+        </div>
+
+        <!-- Software Engineering -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios-filled/50/1e40af/source-code.png"
+            class="w-12 h-12 mb-4"
+            alt="Software Engineering"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Software Engineering
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🔥 Most Downloaded Section -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+        Most Downloaded
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Single Download Item -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
+        >
+          <img
+            src="https://img.icons8.com/fluency/48/downloads.png"
+            alt="Download"
+            class="w-10 h-10"
+          />
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              CSE Final Year Project Report
+            </h3>
+            <p class="text-sm text-gray-600">
+              Computer Science | 125 downloads
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
+        >
+          <img
+            src="https://img.icons8.com/fluency/48/downloads.png"
+            alt="Download"
+            class="w-10 h-10"
+          />
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              BBA Financial Report 2023
+            </h3>
+            <p class="text-sm text-gray-600">Business | 110 downloads</p>
+          </div>
+        </div>
+
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
+        >
+          <img
+            src="https://img.icons8.com/fluency/48/downloads.png"
+            alt="Download"
+            class="w-10 h-10"
+          />
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              LAW Case Study Compilation
+            </h3>
+            <p class="text-sm text-gray-600">Law | 98 downloads</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🆕 Recently Uploaded Section -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+        Recently Uploaded
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Upload Item -->
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
+        >
+          <img
+            src="https://img.icons8.com/fluency/48/upload.png"
+            alt="Upload"
+            class="w-10 h-10"
+          />
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              English Literature Notes
+            </h3>
+            <p class="text-sm text-gray-600">Uploaded 2 days ago</p>
+          </div>
+        </div>
+
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
+        >
+          <img
+            src="https://img.icons8.com/fluency/48/upload.png"
+            alt="Upload"
+            class="w-10 h-10"
+          />
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              EEE Lab Manual (Fall 2024)
+            </h3>
+            <p class="text-sm text-gray-600">Uploaded 4 days ago</p>
+          </div>
+        </div>
+
+        <div
+          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
+        >
+          <img
+            src="https://img.icons8.com/fluency/48/upload.png"
+            alt="Upload"
+            class="w-10 h-10"
+          />
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              Software Engineering Mid Questions
+            </h3>
+            <p class="text-sm text-gray-600">Uploaded 5 days ago</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

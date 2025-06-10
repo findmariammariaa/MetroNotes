@@ -1,2 +1,3 @@
 # MetroNotes
-Note Sharing Platform for Metropolitan University Students
+Note Sharing Platform for Metropolitan University Students.
+

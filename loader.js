@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // === HOMEPAGE CUSTOM NAV ===
-    if (path.endsWith("/home.html") || path === "/") {
+    if (path.endsWith("/home.html")) {
       // Remove default nav sections
       const navLinks = document.querySelector(".header-links");
       const authButtons = document.querySelector(".header-auth");
@@ -57,12 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
           </a>
         `;
         navContainer.appendChild(customBtns);
-      }
-
-      // Make navbar sticky
-      const navbar = document.getElementById("main-navbar");
-      if (navbar) {
-        navbar.classList.add("sticky", "top-0", "z-50");
       }
     }
   });

@@ -32,33 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginBtn) loginBtn.style.display = "none";
     }
 
-    // === HOMEPAGE CUSTOM NAV ===
-    if (path.endsWith("/home.html")) {
-      // Remove default nav sections
-      const navLinks = document.querySelector(".header-links");
-      const authButtons = document.querySelector(".header-auth");
-      const mobileMenu = document.querySelector(".header-mobile-menu");
-      if (navLinks) navLinks.remove();
-      if (authButtons) authButtons.remove();
-      if (mobileMenu) mobileMenu.innerHTML = "";
-
-      // Insert new buttons in navbar
-      const navContainer = document.querySelector(
-        "nav .flex.justify-between.items-center"
-      );
-      if (navContainer) {
-        const customBtns = document.createElement("div");
-        customBtns.className = "flex-none space-x-4 items-center";
-        customBtns.innerHTML = `
-          <a class="btn btn-ghost text-xl">Browse Notes</a>
-          <a class="btn btn-ghost text-xl">Upload Notes</a>
-          <a href="../others/login.html">
-            <button class="btn bg-blue-950 rounded-md text-white login-btn text-xl">Log Out</button>
-          </a>
-        `;
-        navContainer.appendChild(customBtns);
-      }
-    }
   });
 
   // === FOOTER LOADER ===

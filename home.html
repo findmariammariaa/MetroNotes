@@ -12,9 +12,57 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
+<body class="bg-gray-100">
+  <nav id="main-navbar" class="bg-gray-400 shadow-lg sticky top-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
+      <div class="flex justify-between items-center p-4 ">
+        
+        <!-- ====== LOGO SECTION ====== -->
+        <div class="header-logo flex-shrink-0">
+          <h1 class="text-3xl font-bold text-indigo-950">MetroNotes</h1>
+        </div>
 
-  <!-- header -->
- <div id="header"> </div>
+
+        <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
+        <div class="header-auth hidden lg:flex space-x-4 items-center">
+                <a class="btn btn-ghost text-xl">Browse Notes</a>
+          <a class="btn btn-ghost text-xl">Upload Notes</a>
+          <a href="./index.html">
+            <button class="btn bg-blue-950 rounded-md text-white login-btn text-xl">Log Out</button>
+          </a>
+        </div>
+
+        <!-- ====== MOBILE MENU BUTTON ====== -->
+        <div class="lg:hidden">
+          <button id="menu-btn" class="btn btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-indigo-950"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== MOBILE MENU SECTION ====== -->
+    <div id="mobile-menu" class="header-mobile-menu hidden lg:hidden px-4 pb-4 space-y-2">
+                <a class="btn btn-ghost text-xl">Browse Notes</a>
+          <a class="btn btn-ghost text-xl">Upload Notes</a>
+          <a href="./index.html">
+            <button class="btn bg-blue-950 rounded-md text-white login-btn text-xl">Log Out</button>
+          </a>
+    </div>
+  </nav>
 
 
     <!-- ✅ Hero Section -->

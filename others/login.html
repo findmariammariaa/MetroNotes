@@ -11,47 +11,54 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
-
   <!-- header -->
- <div id="header"> </div>
-    <div class="hero bg-red-900 min-h-screen">
-        <div class="hero-content flex-col lg:flex-row-reverse gap-50 ">
-            <div class="flex-col">
-                
-              <img src="../utilities/logo.png" alt="" class="max-w-sm rounded-lg m-5 mb-10">
-
-              <div>
-                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-auto h-xl border p-4">
-                    <h1 class="text-xl font-bold text-blue-950">Login</h1>
-                  
-                    <label class="label">Email</label>
-                    <input type="email" class="input w-auto" placeholder="Email" />
-                  
-                    <label class="label">Password</label>
-                    <input type="password" class="input w-auto" placeholder="Password" />
-                  
-                    <button class="btn btn-neutral mt-4 w-auto bg-blue-950">Login</button>
-                  </fieldset>
-              </div>
-            </div>
-
-          <img
-          src="../utilities/image.png"
-          class="max-w-sm rounded-lg"
+  <div id="header"></div>
+  <div class="hero bg-red-900 min-h-screen">
+    <div class="hero-content flex-col lg:flex-row-reverse gap-50">
+      <div class="flex-col">
+        <img
+          src="../utilities/logo.png"
+          alt=""
+          class="max-w-sm rounded-lg m-5 mb-10"
         />
+
+        <div>
+          <fieldset
+            class="fieldset bg-base-200 border-base-300 rounded-box w-auto h-xl border p-4"
+          >
+            <h1 class="text-xl font-bold text-blue-950">Login</h1>
+
+            <label class="label">Email</label>
+            <input type="email" class="input w-auto" placeholder="Email" />
+
+            <label class="label">Password</label>
+            <input
+              type="password"
+              class="input w-auto"
+              placeholder="Password"
+            />
+
+            <button class="btn btn-neutral mt-4 w-auto bg-blue-950">
+              Login
+            </button>
+          </fieldset>
         </div>
       </div>
-  
-    <script>
-      const menuBtn = document.getElementById("menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-  
-      menuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
-    </script>
-  
 
-    <!-- footer -->
-<div id="footer"></div>
-<script src="../loader.js"></script>
+      <img src="../utilities/image.png" class="max-w-sm rounded-lg" />
+    </div>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+
+  <!-- footer -->
+  <div id="footer"></div>
+  <script src="../loader.js"></script>
+</html>

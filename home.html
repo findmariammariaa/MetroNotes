@@ -3,13 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="./utilities/fav.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
       rel="stylesheet"
       type="text/css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+      .logo {
+        font-family: 'Poppins', serif;
+        font-weight: 700;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Montserrat", sans-serif;
+      }
+      h6 {
+        color: #f1fff9;
+      }
+
+      .heading {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .body-font {
+        font-family: "Open Sans", sans-serif;
+      }
+      p {
+        font-family: "Open Sans", sans-serif;
+        font-size: 1rem; /* Tailwind: text-base */
+        line-height: 1.75rem; /* Tailwind: leading-relaxed */
+        color: #374251; /* Tailwind: text-gray-700 */
+        margin-bottom: 1rem; /* spacing between paragraphs */
+      }
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
+
+
 
   <body class="bg-gray-100">
     <nav id="main-navbar" class="bg-gray-400 shadow-lg sticky top-0 z-50">
@@ -22,9 +69,10 @@
 
           <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
           <div class="header-auth hidden lg:flex space-x-4 items-center">
-            <a class="btn btn-ghost text-xl">Browse Notes</a>
-            <a class="btn btn-ghost text-xl">Upload Notes</a>
-            <a href="./index.html">
+            <a class="btn btn-ghost text-xl" href="./index.html">Home</a>
+            <a class="btn btn-ghost text-xl" href="./others/browse.html">Browse Notes</a>
+            <a class="btn btn-ghost text-xl" href="./others/upload.html">Upload Notes</a>
+            <a href="./others/login.html">
               <button
                 class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
               >
@@ -60,8 +108,9 @@
         id="mobile-menu"
         class="header-mobile-menu hidden lg:hidden px-4 pb-4 space-y-2"
       >
-        <a class="btn btn-ghost text-xl">Browse Notes</a>
-        <a class="btn btn-ghost text-xl">Upload Notes</a>
+        
+        <a class="btn btn-ghost text-xl" href="./others/browse.html">Browse Notes</a>
+        <a class="btn btn-ghost text-xl" href="./others/upload.html">Upload Notes</a>
         <a href="./index.html">
           <button
             class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
@@ -95,10 +144,10 @@
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-2">
         <button class="btn bg-green-500 text-white hover:bg-green-600">
-          Upload Notes
+          <a href="./others/upload.html">Upload Notes</a>
         </button>
         <button class="btn bg-blue-600 text-white hover:bg-blue-700">
-          Browse Notes
+          <a href="./others/browse.html">Browse Notes</a>
         </button>
       </div>
     </section>
@@ -112,7 +161,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <!-- CSE -->
         <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+          class="border-blue-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios-filled/50/1e40af/laptop-coding.png"
@@ -126,7 +175,7 @@
 
         <!-- EEE -->
         <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+          class="border-gray-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/electrical.png"
@@ -140,7 +189,7 @@
 
         <!-- BBA -->
         <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+          class="border-red-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/business.png"
@@ -154,7 +203,7 @@
 
         <!-- English -->
         <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+          class="border-green-900 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/book.png"
@@ -166,7 +215,7 @@
 
         <!-- Law -->
         <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+          class="border-red-900 border-t-8 bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/scales.png"
@@ -178,7 +227,7 @@
 
         <!-- Software Engineering -->
         <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+          class="border-purple-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios-filled/50/1e40af/source-code.png"

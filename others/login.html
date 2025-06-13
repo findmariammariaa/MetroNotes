@@ -11,47 +11,264 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
+  <body class="flex flex-col">
+    <nav id="main-navbar" class="bg-gray-400 shadow-lg">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
+        <div class="flex justify-between items-center p-4">
+          <!-- ====== LOGO SECTION ====== -->
+          <div class="header-logo flex-shrink-0">
+            <h1 class="text-3xl font-bold text-indigo-950">MetroNotes</h1>
+          </div>
 
-  <!-- header -->
- <div id="header"> </div>
-    <div class="hero bg-red-900 min-h-screen">
-        <div class="hero-content flex-col lg:flex-row-reverse gap-50 ">
-            <div class="flex-col">
-                
-              <img src="../utilities/logo.png" alt="" class="max-w-sm rounded-lg m-5 mb-10">
+          <!-- ====== DESKTOP NAV LINKS SECTION ====== -->
+          <div class="header-links hidden lg:flex space-x-4 items-center">
+            <a
+              href="../home.html"
+              class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+              >Home</a
+            >
+            <a
+              href="../others/features.html"
+              class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+              >Features</a
+            >
+            <a
+              href="../others/about.html"
+              class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+              >About</a
+            >
+          </div>
 
-              <div>
-                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-auto h-xl border p-4">
-                    <h1 class="text-xl font-bold text-blue-950">Login</h1>
-                  
-                    <label class="label">Email</label>
-                    <input type="email" class="input w-auto" placeholder="Email" />
-                  
-                    <label class="label">Password</label>
-                    <input type="password" class="input w-auto" placeholder="Password" />
-                  
-                    <button class="btn btn-neutral mt-4 w-auto bg-blue-950">Login</button>
-                  </fieldset>
-              </div>
-            </div>
+          <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
+          <div class="header-auth hidden lg:flex space-x-4 items-center">
+            <a href="../others/signup.html">
+              <button
+                class="btn btn-primary signup-btn bg-red-800 text-white text-xl hover:bg-red-900"
+              >
+                Sign Up
+              </button>
+            </a>
+          </div>
 
-          <img
-          src="../utilities/image.png"
-          class="max-w-sm rounded-lg"
-        />
+          <!-- ====== MOBILE MENU BUTTON ====== -->
+          <div class="lg:hidden">
+            <button id="menu-btn" class="btn btn-ghost">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-indigo-950"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-  
+
+      <!-- ====== MOBILE MENU SECTION ====== -->
+      <div
+        id="mobile-menu"
+        class="header-mobile-menu hidden lg:hidden px-4 pb-4 space-y-2"
+      >
+        <a
+          href="home.html"
+          class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
+          >Home</a
+        >
+        <a
+          href="features.html"
+          class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
+          >Features</a
+        >
+        <a
+          href="about.html"
+          class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
+          >About</a
+        >
+        <button class="btn btn-outline w-full text-xl">Login</button>
+        <button class="btn btn-primary w-full bg-red-800 text-xl text-white">
+          Sign Up
+        </button>
+      </div>
+    </nav>
+
+    <!-- ===== MAIN SECTION ===== -->
+    <main class="flex flex-1">
+      <!-- LEFT -->
+      <div
+        class="w-1/2 hidden lg:flex flex-col items-start pl-36 py-36 space-y-6 text-white bg-cover bg-center min-h"
+        style="background-image: url('../utilities/login.png'); opacity: 85%"
+      >
+        <img src="../utilities/logo.png" alt="" />
+        <div class="text-left">
+          <h2 class="text-4xl font-bold mb-4">MetroNotes</h2>
+          <p class="text-lg">Your study companion at Metropolitan University</p>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div
+        class="p-16 py-36 pr-36 lg:w-1/2 flex flex-col justify-center bg-blue-50 h-full"
+      >
+        <h2 class="text-2xl font-bold text-[#0A1D37] mb-2">
+          Login to MetroNotes
+        </h2>
+        <p class="text-sm text-gray-500 mb-6">
+          Your study companion at Metropolitan University
+        </p>
+
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="text-sm text-gray-700 block mb-1"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="w-full px-4 py-2 border border-gray-300 rounded"
+              placeholder="Email"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-700 block mb-1">Password</label>
+            <div class="relative">
+              <input
+                id="password"
+                type="password"
+                class="w-full px-4 py-2 border border-gray-300 rounded"
+                placeholder="Password"
+                required
+              />
+              <button
+                type="button"
+                onclick="togglePassword()"
+                class="absolute right-3 top-2 text-sm text-gray-600"
+              >
+                Show
+              </button>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center text-sm">
+            <label><input type="checkbox" class="mr-1" /> Remember me</label>
+            <a href="#" class="text-red-600 hover:underline"
+              >Forgot password?</a
+            >
+          </div>
+
+          <button
+            type="submit"
+            class="bg-[#B71C1C] w-full text-white py-2 rounded hover:bg-red-700"
+          >
+            Login
+          </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-600 mt-6">
+          Don’t have an account?
+          <a href="#" class="text-red-600 hover:underline">Sign up</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Script -->
+    <script>
+      function togglePassword() {
+        const input = document.getElementById("password");
+        input.type = input.type === "password" ? "text" : "password";
+      }
+    </script>
+
+    <footer class="bg-gray-400">
+      <div
+        class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-indigo-950"
+      >
+        <!-- About Section -->
+        <div>
+          <h2 class="text-2xl font-bold mb-4">MetroNotes</h2>
+          <p class="text-base">
+            MetroNotes is your digital companion for note-taking and resource
+            sharing among Metropolitan University students.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h2 class="text-xl font-semibold mb-4">Quick Links</h2>
+          <ul class="flex gap-6">
+            <li>
+              <a href="../index.html" class="hover:underline hover:text-white"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="../others/features.html"
+                class="hover:underline hover:text-white"
+                >Features</a
+              >
+            </li>
+            <li>
+              <a
+                href="../others/about.html"
+                class="hover:underline hover:text-white"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                href="../others/login.html"
+                class="hover:underline hover:text-white"
+                >Login</a
+              >
+            </li>
+            <li>
+              <a
+                href="../others/signup.html"
+                class="hover:underline hover:text-white"
+                >Sign Up</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-xl font-semibold mb-4">Contact Us</h2>
+          <p>
+            Email:
+            <a
+              href="mailto:support@metronotes.com"
+              class="hover:underline hover:text-white"
+              >support@metronotes.com</a
+            >
+          </p>
+          <p>Phone: +880-1234-567890</p>
+          <p>Location: Metropolitan University, Sylhet</p>
+        </div>
+      </div>
+
+      <!-- Bottom Footer -->
+      <div class="text-center py-4 bg-gray-500 text-white text-sm">
+        © 2025 MetroNotes. All rights reserved.
+      </div>
+    </footer>
+
     <script>
       const menuBtn = document.getElementById("menu-btn");
       const mobileMenu = document.getElementById("mobile-menu");
-  
+
       menuBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
       });
     </script>
-  
-
-    <!-- footer -->
-<div id="footer"></div>
-<script src="../loader.js"></script>
+  </body>
+</html>

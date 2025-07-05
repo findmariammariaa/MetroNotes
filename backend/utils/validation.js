@@ -40,7 +40,31 @@ const validateEmail = (email) => {
   return emailRegex.test(email);
 };
 
+// NEW: Student ID validation for XXX-XXX-XXX format
+const validateStudentId = (studentId) => {
+  const errors = [];
+
+  if (!studentId) {
+    errors.push("Student ID is required");
+    return { isValid: false, errors };
+  }
+
+  // Remove any spaces
+  const cleanId = studentId.replace(/\s/g, "");
+
+  // Check format: exactly 3 digits, dash, 3 digits, dash, 3 digits
+  if (!/^\d{3}-\d{3}-\d{3}$/.test(cleanId)) {
+    errors.push("Student ID must be in format XXX-XXX-XXX (e.g., 222-115-234)");
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors: errors,
+  };
+};
+
 module.exports = {
   validatePassword,
   validateEmail,
+  validateStudentId,
 };

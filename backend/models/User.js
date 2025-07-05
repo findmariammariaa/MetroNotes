@@ -14,7 +14,13 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
-      uppercase: true,
+      // Updated validation for 3-3-3 digit format
+      validate: {
+        validator: function (v) {
+          return /^\d{3}-\d{3}-\d{3}$/.test(v);
+        },
+        message: "Student ID must be in format XXX-XXX-XXX (e.g., 222-115-234)",
+      },
     },
     email: {
       type: String,
@@ -38,8 +44,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minLength: 8, 
-      
+      minLength: 8,
     },
     role: {
       type: String,
@@ -66,9 +71,18 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+// Updated pre-save middleware to handle the new format
 UserSchema.pre("save", function (next) {
   if (this.studentId) {
-    this.studentId = this.studentId.toUpperCase();
+    // Remove any spaces and ensure proper format
+    this.studentId = this.studentId.replace(/\s/g, "");
+
+    // Validate format before saving
+    if (!/^\d{3}-\d{3}-\d{3}$/.test(this.studentId)) {
+      const err = new Error("Student ID must be in format XXX-XXX-XXX");
+      err.name = "ValidationError";
+      return next(err);
+    }
   }
   next();
 });

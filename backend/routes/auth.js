@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const auth = require("../middleware/authMiddleware");
-const { validatePassword } = require("../utils/validation"); // ✅ Import validation
+const { validatePassword, validateStudentId } = require("../utils/validation"); // ✅ Import validation
 const router = express.Router();
 
 // Signup route
@@ -12,10 +12,10 @@ router.post("/signup", async (req, res) => {
     const { name, email, password, studentId, phone } = req.body;
 
     // Basic validation
-    if (!name || !email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Name, email, and password are required" });
+    if (!name || !email || !password || !studentId) {
+      return res.status(400).json({
+        message: "Name, email, password, and Student ID are required",
+      });
     }
 
     // VALIDATE PASSWORD BEFORE HASHING
@@ -27,22 +27,27 @@ router.post("/signup", async (req, res) => {
       });
     }
 
+    // VALIDATE STUDENT ID FORMAT
+    const studentIdValidation = validateStudentId(studentId);
+    if (!studentIdValidation.isValid) {
+      return res.status(400).json({
+        message: "Student ID validation failed",
+        errors: studentIdValidation.errors,
+      });
+    }
+
     // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    // Check if studentId exists (if provided)
-    if (studentId) {
-      const existingStudentId = await User.findOne({
-        studentId: studentId.toUpperCase(),
-      });
-      if (existingStudentId) {
-        return res
-          .status(400)
-          .json({ message: "Student ID already registered" });
-      }
+    // Check if studentId exists
+    const existingStudentId = await User.findOne({
+      studentId: studentId.trim(),
+    });
+    if (existingStudentId) {
+      return res.status(400).json({ message: "Student ID already registered" });
     }
 
     // Hash password AFTER validation
@@ -54,7 +59,7 @@ router.post("/signup", async (req, res) => {
       name,
       email,
       password: hashedPassword, // ✅ Now hashed password goes to DB
-      studentId: studentId || `STU${Date.now()}`,
+      studentId: studentId.trim(),
       phone: phone || "",
     });
 
@@ -90,11 +95,20 @@ router.post("/signup", async (req, res) => {
       });
     }
 
+    // Handle validation errors
+    if (err.name === "ValidationError") {
+      const errors = Object.values(err.errors).map((e) => e.message);
+      return res.status(400).json({
+        message: "Validation failed",
+        errors: errors,
+      });
+    }
+
     res.status(500).json({ message: "Server error" });
   }
 });
 
-// Login route (unchanged)
+// Login route - updated to accept studentId or email
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -102,10 +116,19 @@ router.post("/login", async (req, res) => {
     if (!email || !password) {
       return res
         .status(400)
-        .json({ message: "Email and password are required" });
+        .json({ message: "Email/Student ID and password are required" });
     }
 
-    const user = await User.findOne({ email });
+    // Check if input is student ID format or email
+    let user;
+    if (/^\d{3}-\d{3}-\d{3}$/.test(email)) {
+      // Input is student ID
+      user = await User.findOne({ studentId: email });
+    } else {
+      // Input is email
+      user = await User.findOne({ email });
+    }
+
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
@@ -141,7 +164,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Get profile 
+// Get profile
 router.get("/profile", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user).select("-password");
@@ -154,4 +177,10 @@ router.get("/profile", auth, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+// Test route to verify auth routes are working
+router.get("/test", (req, res) => {
+  res.json({ message: "Auth routes are working!" });
+});
+
 module.exports = router;

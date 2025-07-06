@@ -74,27 +74,54 @@
         Your study companion at Metropolitan University
       </p>
 
-      <fieldset
+      <form
         class="fieldset bg-gray-50 border-base-300 rounded-box w-lg h-xl border p-4"
+        id="signupForm"
       >
         <label class="label">Full Name</label>
-        <input type="full-name" class="input w-auto" placeholder="Name" />
+        <input
+          name="fullName"
+          type="full-name"
+          class="input w-auto"
+          placeholder="Name"
+        />
         <label class="label">ID</label>
-        <input type="number" class="input w-auto" placeholder="ID" />
+        <input
+          name="studentId"
+          type="number"
+          class="input w-auto"
+          placeholder="ID"
+        />
         <label class="label">Email</label>
-        <input type="email" class="input w-auto" placeholder="Email" />
+        <input
+          name="email"
+          type="email"
+          class="input w-auto"
+          placeholder="Email"
+        />
         <label class="label">Phone</label>
-        <input type="number" class="input w-auto" placeholder="Phone" />
+        <input
+          name="phone"
+          type="number"
+          class="input w-auto"
+          placeholder="Phone"
+        />
         <label class="label">Password</label>
-        <input type="password" class="input w-auto" placeholder="Password" />
+        <input
+          name="password"
+          type="password"
+          class="input w-auto"
+          placeholder="Password"
+        />
         <label class="label">Confirm Password</label>
         <input
+          name="confirmPassword"
           type="password"
           class="input w-auto"
           placeholder="Confirm Password"
         />
-        <button class="btn btn-neutral mt-4 w-auto bg-red-900">SignUp</button>
-      </fieldset>
+        <button class="btn btn-neutral mt-4 w-auto bg-red-900" type="submit">SignUp</button>
+      </form>
     </div>
 
     <!-- RIGHT -->
@@ -110,16 +137,9 @@
     </div>
   </main>
 
-  <script>
-    const menuBtn = document.getElementById("menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    menuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-  </script>
-
   <!-- footer -->
   <div id="footer"></div>
   <script src="../loader.js"></script>
+  <script src="../script/signup.js"></script>
+
 </html>

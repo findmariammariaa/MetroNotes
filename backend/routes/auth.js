@@ -108,25 +108,20 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Login route - updated to accept studentId or email
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { emailOrId, password } = req.body;
 
-    if (!email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Email/Student ID and password are required" });
+    if (!emailOrId || !password) {
+      return res.status(400).json({ message: "Email/Student ID and password are required" });
     }
 
-    // Check if input is student ID format or email
+    // Detect if emailOrId is student ID format
     let user;
-    if (/^\d{3}-\d{3}-\d{3}$/.test(email)) {
-      // Input is student ID
-      user = await User.findOne({ studentId: email });
+    if (/^\d{3}-\d{3}-\d{3}$/.test(emailOrId)) {
+      user = await User.findOne({ studentId: emailOrId });
     } else {
-      // Input is email
-      user = await User.findOne({ email });
+      user = await User.findOne({ email: emailOrId });
     }
 
     if (!user) {
@@ -138,13 +133,12 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // Update last login
     user.lastLogin = new Date();
     await user.save();
 
     const token = jwt.sign(
       { id: user._id, email: user.email },
-      process.env.JWT_SECRET, // ✅ No fallback
+      process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
@@ -163,6 +157,7 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 // Get profile
 router.get("/profile", auth, async (req, res) => {

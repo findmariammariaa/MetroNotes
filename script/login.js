@@ -1,14 +1,15 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const email = e.target.email.value;
+  const emailOrId = loginForm.emailOrId.value.trim();
+
   const password = e.target.password.value;
 
   try {
     const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ emailOrId: emailOrId, password: password }),
     });
 
     const data = await response.json();

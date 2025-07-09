@@ -15,12 +15,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (!response.ok) throw new Error(data.message || "Login failed");
-
     // Save the token in localStorage
     localStorage.setItem("token", data.token);
-
     alert("Login successful!");
     window.location.href = "../home.html";
+
   } catch (err) {
     alert(err.message);
   }

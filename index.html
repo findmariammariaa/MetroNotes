@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,7 +59,7 @@
   </head>
 
   <!-- header -->
-  <div id="header"></div>
+  <div id="header" class="sticky top-0 z-50"></div>
 
   <!-- hero section -->
   <div class="hero bg-gray-250 min-h-screen">
@@ -74,6 +74,7 @@
           Metropolitan University
         </p>
         <button
+        id="getStartedBtn"
           class="btn btn-primary bg-blue-950 p-5 text-lg text-white font-bold hover:bg-blue-900 rounded-lg"
         >
           Get Started
@@ -82,8 +83,181 @@
     </div>
   </div>
 
+  <!-- Features Section -->
+  <section class="py-16 px-4 max-w-7xl mx-auto" id="feature">
+    <h2 class="text-4xl font-bold mb-12 text-center text-gray-800 font-poppins">
+      Key Features
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <!-- Feature Card -->
+      <div
+        class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-red-600"
+      >
+        <div
+          class="w-12 h-12 bg-red-100 text-red-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+        >
+          🔍
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+          Smart Search
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          Quickly find notes by department or course with our intuitive search
+          bar.
+        </p>
+      </div>
 
+      <!-- Repeat this structure for each card -->
+      <div
+        class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-blue-600"
+      >
+        <div
+          class="w-12 h-12 bg-blue-100 text-blue-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+        >
+          📤
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+          Easy Upload
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          Share your notes with a simple upload feature to help fellow students.
+        </p>
+      </div>
+
+      <div
+        class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-green-600"
+      >
+        <div
+          class="w-12 h-12 bg-green-100 text-green-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+        >
+          📚
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+          Department-Wise Categorization
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          Access content tailored to your specific academic department.
+        </p>
+      </div>
+
+      <div
+        class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-yellow-500"
+      >
+        <div
+          class="w-12 h-12 bg-yellow-100 text-yellow-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+        >
+          💬
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+          Anonymous Sharing
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          Upload or download notes without the need to reveal your identity.
+        </p>
+      </div>
+
+      <div
+        class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-purple-600"
+      >
+        <div
+          class="w-12 h-12 bg-purple-100 text-purple-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+        >
+          📈
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+          Trending & Recent
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          Explore the most downloaded and freshly added notes anytime.
+        </p>
+      </div>
+
+      <div
+        class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-gray-600"
+      >
+        <div
+          class="w-12 h-12 bg-gray-200 text-gray-700 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+        >
+          🔐
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+          Secure & Accessible
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          Your notes are stored safely and are accessible 24/7 across devices.
+        </p>
+      </div>
+    </div>
+  </section>
+
+    <!-- About Section -->
+  <section class="flex-grow mx-auto" id="about">
+    <section class="py-16 px-6 sm:px-10 max-w-7xl mx-auto text-center">
+      <div
+        class="rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-blue-600"
+      >
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">About MetroNotes</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-gray-800">
+          MetroNotes is a student-built platform created to make academic life
+          easier for students at Metropolitan University. We believe in open
+          collaboration and easy access to educational resources.
+        </p>
+        <p class="mt-6 text-base sm:text-lg leading-relaxed text-gray-800">
+          Whether you're preparing for exams or organizing class notes,
+          MetroNotes supports you with intuitive design, department-based
+          organization, and a smooth upload system. We aim to make studying
+          collaborative, accessible, and efficient.
+        </p>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-16 px-6 sm:px-10" id="team">
+      <div class="max-w-7xl mx-auto text-center">
+        <h3 class="text-2xl sm:text-3xl font-bold mb-12">Meet the Team</h3>
+        <div class="grid gap-10 sm:grid-cols-2">
+          <!-- Team Member 1 -->
+          <div
+            class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-red-600"
+          >
+            <a
+              href="https://github.com/findmariammariaa"
+              target="_blank"
+              class="block mb-4"
+            >
+              <img
+                src="https://avatars.githubusercontent.com/u/125682032?v=4"
+                alt="John Doe"
+                class="w-60 h-60 mx-auto rounded-full border-4 border-indigo-300 hover:scale-105 transition duration-300"
+              />
+            </a>
+            <h4 class="text-lg font-semibold">Maria Akter Mariam</h4>
+            <p class="text-sm text-gray-600">Frontend Developer</p>
+          </div>
+
+          <!-- Team Member 2 -->
+          <div
+            class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-gray-600"
+          >
+            <a
+              href="https://github.com/Prattaymu10"
+              target="_blank"
+              class="block mb-4"
+            >
+              <img
+                src="https://avatars.githubusercontent.com/u/209658487?v=4"
+                alt="Prattay"
+                class="w-60 h-60 mx-auto rounded-full border-4 border-indigo-300 hover:scale-105 transition duration-300"
+              />
+            </a>
+            <h4 class="text-lg font-semibold">Prattay S Rahan</h4>
+            <p class="text-sm text-gray-600">Backend Developer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
   <!-- footer -->
   <div id="footer"></div>
-  <script src="./loader.js"></script>
+  <script src="./index.js"></script>
 </html>

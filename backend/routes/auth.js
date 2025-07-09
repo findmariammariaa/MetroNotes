@@ -94,7 +94,6 @@ router.post("/signup", async (req, res) => {
         } already exists`,
       });
     }
-
     // Handle validation errors
     if (err.name === "ValidationError") {
       const errors = Object.values(err.errors).map((e) => e.message);

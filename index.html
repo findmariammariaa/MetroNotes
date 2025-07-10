@@ -53,6 +53,18 @@
         color: #374251; /* Tailwind: text-gray-700 */
         margin-bottom: 1rem; /* spacing between paragraphs */
       }
+      .hero-content {
+        animation: fadeUp 1.5s ease-out forwards;
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -67,7 +79,7 @@
       <img src="./utilities/image.png" class="max-w-sm rounded-lg" />
       <div>
         <h1 class="text-8xl font-bold text-indigo-950">
-          Your Student Note-Taking App
+          Your Student Note-Sharing App
         </h1>
         <p class="py-6 text-xl w-3/4 text-indigo-950">
           Welcome to MetroNotes- Your digital notebook tailored for students at

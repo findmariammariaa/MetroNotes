@@ -94,6 +94,7 @@ router.post("/signup", async (req, res) => {
         } already exists`,
       });
     }
+
     // Handle validation errors
     if (err.name === "ValidationError") {
       const errors = Object.values(err.errors).map((e) => e.message);
@@ -107,12 +108,15 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+// Login route - updated to accept studentId or email
 router.post("/login", async (req, res) => {
   try {
     const { emailOrId, password } = req.body;
 
     if (!emailOrId || !password) {
-      return res.status(400).json({ message: "Email/Student ID and password are required" });
+      return res
+        .status(400)
+        .json({ message: "Email/Student ID and password are required" });
     }
 
     // Detect if emailOrId is student ID format
@@ -156,7 +160,6 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 // Get profile
 router.get("/profile", auth, async (req, res) => {

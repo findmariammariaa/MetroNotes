@@ -64,7 +64,9 @@
         <div class="flex justify-between items-center p-4">
           <!-- ====== LOGO SECTION ====== -->
           <div class="header-logo flex-shrink-0">
-            <a class="text-3xl font-bold text-indigo-950" href="./index.html">MetroNotes</a>
+            <a class="text-3xl font-bold text-indigo-950" href="./index.html"
+              >MetroNotes</a
+            >
           </div>
 
           <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
@@ -72,9 +74,13 @@
             <a class="btn btn-ghost text-xl" href="./others/browse.html"
               >Browse Notes</a
             >
-            <a class="btn btn-ghost text-xl" href="./others/upload.html"
-              >Upload Notes</a
+            <button
+              class="btn btn-ghost text-xl"
+              onclick="upload_modal.showModal()"
             >
+              Upload Notes
+            </button>
+
             <button
               id="logoutBtn"
               class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
@@ -113,9 +119,13 @@
         <a class="btn btn-ghost text-xl" href="./others/browse.html"
           >Browse Notes</a
         >
-        <a class="btn btn-ghost text-xl" href="./others/upload.html"
-          >Upload Notes</a
+        <button
+          class="btn btn-ghost text-xl"
+          onclick="upload_modal.showModal()"
         >
+          Upload Notes
+        </button>
+
         <a href="./index.html">
           <button
             class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
@@ -148,9 +158,13 @@
 
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-2">
-        <button class="btn bg-green-500 text-white hover:bg-green-600">
-          <a href="./others/upload.html">Upload Notes</a>
+        <button
+          class="btn bg-green-500 text-white hover:bg-green-600"
+          onclick="upload_modal.showModal()"
+        >
+          Upload Notes
         </button>
+
         <button class="btn bg-blue-600 text-white hover:bg-blue-700">
           <a href="./others/browse.html">Browse Notes</a>
         </button>
@@ -306,64 +320,125 @@
     </section>
 
     <!-- 🆕 Recently Uploaded Section -->
-    <section class="max-w-6xl mx-auto px-4 py-12">
+    <section class="max-w-6xl mx-auto px-4 py-12" id="recentNotesGrid">
       <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
         Recently Uploaded
       </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Upload Item -->
-        <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
-        >
-          <img
-            src="https://img.icons8.com/fluency/48/upload.png"
-            alt="Upload"
-            class="w-10 h-10"
-          />
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800">
-              English Literature Notes
-            </h3>
-            <p class="text-sm text-gray-600">Uploaded 2 days ago</p>
-          </div>
-        </div>
-
-        <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
-        >
-          <img
-            src="https://img.icons8.com/fluency/48/upload.png"
-            alt="Upload"
-            class="w-10 h-10"
-          />
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800">
-              EEE Lab Manual (Fall 2024)
-            </h3>
-            <p class="text-sm text-gray-600">Uploaded 4 days ago</p>
-          </div>
-        </div>
-
-        <div
-          class="bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4"
-        >
-          <img
-            src="https://img.icons8.com/fluency/48/upload.png"
-            alt="Upload"
-            class="w-10 h-10"
-          />
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800">
-              Software Engineering Mid Questions
-            </h3>
-            <p class="text-sm text-gray-600">Uploaded 5 days ago</p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- footer -->
     <div id="footer"></div>
+    <!-- Upload Notes Modal -->
+    <dialog id="upload_modal" class="modal">
+      <div class="modal-box w-11/12 max-w-2xl bg-white">
+        <h3 class="font-bold text-2xl mb-4 text-center text-indigo-950">
+          Upload Notes
+        </h3>
+        <form method="dialog">
+          <button
+            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+        </form>
+        <p class="text-gray-600 mb-6 text-center">
+          Share your notes with the MetroNotes community!
+        </p>
+        <form method="dialog" class="space-y-4" id="uploadForm">
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Your Name</label
+            >
+            <input
+              type="text"
+              placeholder="Anonymous"
+              class="input input-bordered w-full"
+              name="uploaderName"
+               required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Your ID</label
+            >
+            <input
+              type="text"
+              placeholder="222-115-218"
+              class="input input-bordered w-full"
+              name="uploaderId"
+               required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Department</label
+            >
+            <select class="select select-bordered w-full" name="department"  required>
+              <option>CSE</option>
+              <option>BBA</option>
+              <option>ENG</option>
+              <option>SWE</option>
+              <option>Law</option>
+              <option>EEE</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Course Name</label
+            >
+            <input
+              type="text"
+              placeholder="E.g., Data Structures"
+              class="input input-bordered w-full"
+              name="courseName"
+               required
+            />
+          </div>
+                    <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Batch and Section</label
+            >
+            <input
+              type="text"
+              placeholder="E.g., 57F, 57G"
+              class="input input-bordered w-full"
+              name="title"
+               required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Course Code</label
+            >
+            <input
+              type="text"
+              placeholder="E.g., CSE-231"
+              class="input input-bordered w-full"
+              name="courseCode"
+              required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Upload PDF</label
+            >
+            <input
+              type="file"
+              accept=".pdf"
+              class="file-input file-input-bordered w-full"
+              required
+              name="file"
+            />
+          </div>
+          <div class="modal-action">
+            <button class="btn bg-red-900 text-white hover:bg-red-800 w-full" type="submit">
+              Upload Note
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
     <script src="./loader.js"></script>
     <script src="../script/home.js"></script>
   </body>

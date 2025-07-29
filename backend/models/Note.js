@@ -21,13 +21,12 @@ const NoteSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        "Computer Science & Engineering",
-        "Electrical & Electronic Engineering",
-        "Business Administration",
-        "English",
+        "CSE",
+        "EEE",
+        "BBA",
+        "ENG",
         "Law",
-        "Software Engineering",
-        "Other",
+      "SWE",
       ],
     },
     courseName: {

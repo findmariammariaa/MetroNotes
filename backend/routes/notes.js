@@ -444,7 +444,113 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: "Server error while fetching note" });
   }
 });
+// Download route - forces file download with proper extension
+router.get("/download/:id", async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
 
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    // Extract file extension from original filename
+    const fileExtension = note.fileName.split(".").pop().toLowerCase();
+
+    // Create a safe filename for download
+    const safeTitle = note.title
+      .replace(/[^a-zA-Z0-9\s\-_]/g, "")
+      .replace(/\s+/g, "_");
+    const downloadFileName = `${safeTitle}.${fileExtension}`;
+
+    // Set proper MIME type based on file extension
+    const mimeTypes = {
+      pdf: "application/pdf",
+      doc: "application/msword",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      txt: "text/plain",
+      ppt: "application/vnd.ms-powerpoint",
+      pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      png: "image/png",
+    };
+
+    const mimeType = mimeTypes[fileExtension] || "application/octet-stream";
+
+    console.log(
+      `📥 File download: ${downloadFileName} by user: ${
+        req.user || "anonymous"
+      }`
+    );
+
+    // Set headers for download with proper filename
+    res.set({
+      "Content-Disposition": `attachment; filename="${downloadFileName}"`,
+      "Content-Type": mimeType,
+    });
+
+    // Redirect to Cloudinary with download parameters
+    const downloadUrl = note.fileUrl.includes("?")
+      ? `${note.fileUrl}&fl_attachment=${encodeURIComponent(downloadFileName)}`
+      : `${note.fileUrl}?fl_attachment=${encodeURIComponent(downloadFileName)}`;
+
+    res.redirect(downloadUrl);
+  } catch (err) {
+    console.error("Download error:", err);
+    res.status(500).json({ message: "Server error while downloading file" });
+  }
+});
+
+// View route - displays file in browser for preview
+router.get("/view/:id", async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    // Extract file extension
+    const fileExtension = note.fileName.split(".").pop().toLowerCase();
+
+    // Set appropriate MIME type for inline viewing
+    const mimeTypes = {
+      pdf: "application/pdf",
+      doc: "application/msword",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      txt: "text/plain; charset=utf-8",
+      ppt: "application/vnd.ms-powerpoint",
+      pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      png: "image/png",
+      gif: "image/gif",
+    };
+
+    const mimeType = mimeTypes[fileExtension] || "application/octet-stream";
+
+    console.log(
+      `📖 File preview: ${note.fileName} (${note.title}) by user: ${
+        req.user || "anonymous"
+      }`
+    );
+
+    // Set headers for inline viewing (not download)
+    res.set({
+      "Content-Disposition": "inline",
+      "Content-Type": mimeType,
+      "X-Frame-Options": "SAMEORIGIN",
+      "Cache-Control": "public, max-age=3600",
+      "X-Content-Type-Options": "nosniff",
+    });
+
+    // Redirect to Cloudinary URL for inline viewing
+    res.redirect(note.fileUrl);
+  } catch (err) {
+    console.error("View error:", err);
+    res.status(500).json({ message: "Server error while viewing file" });
+  }
+});
 // Get user's uploaded notes
 router.get("/user/my-notes", auth, async (req, res) => {
   try {

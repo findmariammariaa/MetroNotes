@@ -66,6 +66,8 @@ app.get("/api", (req, res) => {
         updateDownloadCount: "PATCH /api/notes/:id/download",
         deleteNote: "DELETE /api/notes/:id",
         getDepartmentStats: "GET /api/notes/stats/departments",
+        downloadFile: "GET /api/notes/download/:id", 
+        viewFile: "GET /api/notes/view/:id", 
       },
     },
   });

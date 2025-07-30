@@ -67,7 +67,7 @@ const storage = new CloudinaryStorage({
       "jpeg",
       "png",
     ],
-    resource_type: "auto", // Automatically detect file type
+    resource_type: "raw", // Automatically detect file type
     public_id: (req, file) => {
       // Generate unique filename
       const timestamp = Date.now();

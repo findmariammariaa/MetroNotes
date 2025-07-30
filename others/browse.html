@@ -54,6 +54,52 @@
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+    async function fetchAndRenderNotes() {
+      try {
+        const res = await fetch("http://localhost:5000/api/notes"); // change port if needed
+        const data = await res.json();
+        const notes = data.notes;
+        const grid = document.getElementById("notes-grid");
+        grid.innerHTML = "";
+
+        notes.forEach(note => {
+          const card = document.createElement("div");
+          card.className = "bg-gradient-to-br from-gray-100 to-maroon-100 rounded-xl shadow-md p-5";
+
+          card.innerHTML = `
+            <h2 class="text-xl font-semibold text-navy-900 mb-2">${note.courseCode} – ${note.title}</h2>
+            <p class="text-sm text-gray-700 mb-3">Uploaded by ${note.uploaderName || "Anonymous"}</p>
+            <div class="flex justify-between items-center text-sm text-gray-600">
+              <span>Department: ${note.department}</span>
+                <!-- View PDF in a new tab -->
+                <a href="${note.fileUrl}?fl_attachment=false" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="text-blue-600 hover:underline">
+                  📄 View PDF
+                </a>
+
+                <!-- Force download of the file -->
+                <a href="${note.fileUrl}?fl_attachment=true" 
+                  class="text-blue-600 hover:underline" 
+                  download>
+                  📥 Download
+                </a>
+
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error loading notes:", err);
+      }
+    }
+
+    window.onload = fetchAndRenderNotes;
+</script>
+
   </head>
 
 
@@ -147,7 +193,8 @@
     </div>
 
     <!-- Notes Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div id="notes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
       <!-- Note Card -->
       <div class="bg-gradient-to-br from-gray-100 to-maroon-100 rounded-xl shadow-md p-5">
         <h2 class="text-xl font-semibold text-navy-900 mb-2">CSE 1101 – DSA Notes</h2>

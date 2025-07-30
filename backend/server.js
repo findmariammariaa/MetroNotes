@@ -15,15 +15,21 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Database connection
+const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/metronotes";
+
 mongoose
-  .connect("mongodb://localhost:27017/metronotes")
-  .then(() => {
-    console.log("✅ MongoDB connected successfully");
+  .connect(process.env.MONGO_URI, {
+    tls: true, // only if you want to force TLS explicitly
+    // other options if needed, but not useNewUrlParser or useUnifiedTopology
   })
+  .then(() => console.log("✅ MongoDB connected successfully"))
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err.message);
     process.exit(1);
   });
+
+
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);

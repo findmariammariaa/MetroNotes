@@ -1,0 +1,92 @@
+<body class="bg-gray-100">
+  <nav id="main-navbar" class="bg-gray-400 shadow-lg">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
+      <div class="flex justify-between items-center p-4">
+        <!-- ====== LOGO SECTION ====== -->
+        <div class="header-logo flex-shrink-0">
+          <a class="text-3xl font-bold text-indigo-950" href="../index.html">MetroNotes</a>
+        </div>
+
+        <!-- ====== DESKTOP NAV LINKS SECTION ====== -->
+        <div class="header-links hidden lg:flex space-x-4 items-center">
+          <a
+            id="getStartedBtn2"
+            class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+            >Home</a
+          >
+          <a
+            href="#feature"
+            class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+            >Features</a
+          >
+          <a
+            href="#about"
+            class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+            >About</a>
+        </div>
+
+        <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
+        <div class="header-auth hidden lg:flex space-x-4 items-center">
+          <a href="../others/login.html">
+            <button class="btn btn-outline login-btn text-xl">Login</button>
+          </a>
+          <a href="../others/signup.html">
+            <button
+              class="btn btn-primary signup-btn bg-red-800 text-white text-xl hover:bg-red-900"
+            >
+              Sign Up
+            </button>
+          </a>
+
+          <button class="btn btn-outline text-xl logout-btn" style="display: none">Logout</button>
+        </div>
+
+        <!-- ====== MOBILE MENU BUTTON ====== -->
+        <div class="lg:hidden">
+          <button id="menu-btn" class="btn btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-indigo-950"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== MOBILE MENU SECTION ====== -->
+    <div
+      id="mobile-menu"
+      class="header-mobile-menu hidden lg:hidden px-4 pb-4 space-y-2"
+    >
+      <a
+        href="home.html"
+        class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
+        >Home</a
+      >
+      <a
+        href="features.html"
+        class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
+        >Features</a
+      >
+      <a
+        href="about.html"
+        class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
+        >About</a
+      >
+      <button class="btn btn-outline w-full text-xl">Login</button>
+      <button class="btn btn-primary w-full bg-red-800 text-xl text-white">
+        Sign Up
+      </button>
+    </div>
+  </nav>
+</body>

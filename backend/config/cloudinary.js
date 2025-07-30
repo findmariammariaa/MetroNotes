@@ -67,12 +67,18 @@ const storage = new CloudinaryStorage({
       "jpeg",
       "png",
     ],
-    resource_type: "raw", // Automatically detect file type
+    resource_type: "auto", // Changed from "raw" to "auto" for better handling
     public_id: (req, file) => {
-      // Generate unique filename
+      // Generate unique filename while preserving extension info
       const timestamp = Date.now();
       const originalName = file.originalname.split(".")[0];
+      const extension = file.originalname.split(".").pop();
       return `${originalName}_${timestamp}`;
+    },
+    // Add format parameter to preserve file extension
+    format: (req, file) => {
+      const extension = file.originalname.split(".").pop().toLowerCase();
+      return extension;
     },
   },
 });
@@ -81,7 +87,7 @@ const storage = new CloudinaryStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 20 * 1024 * 1024, // 10MB limit
+    fileSize: 20 * 1024 * 1024, // 20MB limit
   },
   fileFilter: (req, file, cb) => {
     const allowedTypes = [

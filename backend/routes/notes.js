@@ -275,7 +275,157 @@ router.get("/department/:department", async (req, res) => {
     res.status(500).json({ message: "Server error while fetching notes" });
   }
 });
+// Enhanced Download route with better error handling
+router.get("/download/:id", async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
 
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    // More robust file extension extraction
+    const fileExtension =
+      note.fileName.split(".").pop()?.toLowerCase() || "bin";
+
+    // Validate file extension exists
+    if (!fileExtension || fileExtension === note.fileName.toLowerCase()) {
+      console.warn(`Warning: No extension found for file: ${note.fileName}`);
+    }
+
+    // Create a safe filename for download
+    const safeTitle = note.title
+      .replace(/[^a-zA-Z0-9\s\-_]/g, "")
+      .replace(/\s+/g, "_")
+      .substring(0, 50); // Limit length
+
+    const downloadFileName = `${safeTitle}.${fileExtension}`;
+
+    // Enhanced MIME type mapping
+    const mimeTypes = {
+      pdf: "application/pdf",
+      doc: "application/msword",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      txt: "text/plain",
+      ppt: "application/vnd.ms-powerpoint",
+      pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      png: "image/png",
+      gif: "image/gif",
+      zip: "application/zip",
+      rar: "application/x-rar-compressed",
+    };
+
+    const mimeType = mimeTypes[fileExtension] || "application/octet-stream";
+
+    console.log(`📥 File download: ${downloadFileName} (${mimeType})`);
+
+    // Set comprehensive headers
+    res.set({
+      "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(
+        downloadFileName
+      )}`,
+      "Content-Type": mimeType,
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    });
+
+    // Use Cloudinary's download transformation
+    let downloadUrl = note.fileUrl;
+
+    // For non-image files, use fl_attachment
+    if (!["jpg", "jpeg", "png", "gif"].includes(fileExtension)) {
+      downloadUrl = `${note.fileUrl}?fl_attachment=${encodeURIComponent(
+        downloadFileName
+      )}`;
+    } else {
+      // For images, force download with proper headers
+      downloadUrl = `${note.fileUrl}?fl_attachment`;
+    }
+
+    console.log(`Download URL: ${downloadUrl}`);
+    res.redirect(downloadUrl);
+  } catch (err) {
+    console.error("Download error:", err);
+    res.status(500).json({
+      message: "Server error while downloading file",
+      error: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
+  }
+});
+// Enhanced View route with better handling
+router.get("/view/:id", async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    // Extract file extension more safely
+    const fileExtension = note.fileName.split(".").pop()?.toLowerCase() || "";
+
+    // Define viewable file types
+    const viewableTypes = ["pdf", "txt", "jpg", "jpeg", "png", "gif"];
+    const imageTypes = ["jpg", "jpeg", "png", "gif"];
+
+    // Check if file is viewable
+    if (!viewableTypes.includes(fileExtension)) {
+      return res.status(400).json({
+        message:
+          "File type not supported for viewing. Please download instead.",
+        supportedTypes: viewableTypes,
+      });
+    }
+
+    // Set appropriate MIME type for inline viewing
+    const mimeTypes = {
+      pdf: "application/pdf",
+      txt: "text/plain; charset=utf-8",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      png: "image/png",
+      gif: "image/gif",
+    };
+
+    const mimeType = mimeTypes[fileExtension] || "application/octet-stream";
+
+    console.log(
+      `📖 File preview: ${note.fileName} (${note.title}) - ${mimeType}`
+    );
+
+    // Set headers for inline viewing
+    const headers = {
+      "Content-Type": mimeType,
+      "Content-Disposition": "inline",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Cache-Control": "public, max-age=3600",
+      "X-Content-Type-Options": "nosniff",
+    };
+
+    // Additional security headers for different file types
+    if (fileExtension === "pdf") {
+      headers["Content-Security-Policy"] =
+        "default-src 'self'; object-src 'none';";
+    }
+
+    res.set(headers);
+
+    // Generate appropriate Cloudinary URL for viewing
+    let viewUrl = note.fileUrl;
+
+    console.log(`View URL: ${viewUrl}`);
+    res.redirect(viewUrl);
+  } catch (err) {
+    console.error("View error:", err);
+    res.status(500).json({
+      message: "Server error while viewing file",
+      error: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
+  }
+});
 // Get single note by ID
 router.get("/:id", async (req, res) => {
   try {

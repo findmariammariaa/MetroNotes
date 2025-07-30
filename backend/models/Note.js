@@ -26,7 +26,7 @@ const NoteSchema = new mongoose.Schema(
         "BBA",
         "ENG",
         "Law",
-      "SWE",
+        "SWE",
       ],
     },
     courseName: {

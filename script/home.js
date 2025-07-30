@@ -1,4 +1,84 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const notesGrid = document.getElementById("notes-grid"); // Featured
+  const recentUploads = document.getElementById("recent-uploads"); // Recently Uploaded
+
+  async function loadNotes() {
+    try {
+      const response = await fetch("http://localhost:5000/api/notes");
+      const data = await response.json();
+      const notes = data.notes || [];
+
+      const recentNotes = [...notes]
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 6);
+
+      const mostDownloadedNotes = [...notes]
+        .sort((a, b) => (b.downloadCount || 0) - (a.downloadCount || 0))
+        .slice(0, 6);
+
+      // Recently Uploaded section
+      recentNotes.forEach(note => {
+        const card = createNoteCard(note, { showDownloads: false, showUploadedDate: true });
+        recentUploads.appendChild(card);
+      });
+
+      // Featured section
+      mostDownloadedNotes.forEach(note => {
+        const card = createNoteCard(note, { showDownloads: true, showUploadedDate: false });
+        notesGrid.appendChild(card);
+      });
+
+    } catch (error) {
+      console.error("Failed to load notes:", error);
+    }
+  }
+
+  function createNoteCard(note, { showDownloads, showUploadedDate }) {
+    const daysAgo = getDaysAgo(note.createdAt);
+    const card = document.createElement("div");
+    card.className =
+      "bg-white border border-gray-200 rounded-xl p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer";
+
+    card.innerHTML = `
+      <div class="mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">${note.courseName}</h2>
+        <p class="text-sm text-gray-600">${note.courseCode} – ${note.title || ""} ${note.section || ""}</p>
+        <p class="text-sm text-gray-600">
+          Department: <span class="font-medium text-gray-700">${note.department}</span>
+        </p>
+      </div>
+
+      <p class="text-sm text-gray-600 mb-4">
+        Uploaded by: <span class="font-medium text-gray-700">${note.uploaderName || "Anonymous"}</span>
+      </p>
+
+      <div class="text-sm">
+        ${showDownloads ? `<span>📥 ${note.downloadCount || 0} Downloads</span>` : "<span></span>"}
+        ${showUploadedDate ? `<span class="text-gray-500">Uploaded ${daysAgo}</span>` : ""}
+      </div>
+
+      <div class="text-sm text-gray-600 mt-4">
+        <div class="space-x-3 flex justify-between items-center">
+          <a href="${note.fileUrl}?fl_attachment=false" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">📄 View</a>
+          <a href="${note.fileUrl}.pdf?fl_attachment=true" download class="text-blue-600 hover:underline">⬇️ Download</a>
+        </div>
+      </div>
+    `;
+
+    return card;
+  }
+
+
+function getDaysAgo(dateStr) {
+  const createdDate = new Date(dateStr);
+  const now = new Date();
+  const diffTime = Math.abs(now - createdDate);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays === 0 ? "today" : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+}
+
+  loadNotes();
+
   
   const logoutBtn = document.getElementById("logoutBtn");
 
@@ -80,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
           alert("Note uploaded!");
           form.reset();
           document.getElementById("upload_modal").close();
-          loadRecentNotes(); // Optional: reload recently uploaded notes
+          loadNotes(); // Optional: reload recently uploaded notes
         } else {
           alert("Upload failed: " + result.message);
         }
@@ -141,12 +221,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 }
 
-function getDaysAgo(dateStr) {
-  const createdDate = new Date(dateStr);
-  const now = new Date();
-  const diffTime = Math.abs(now - createdDate);
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays === 0 ? "today" : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
-}
 
 });

@@ -67,7 +67,8 @@ const storage = new CloudinaryStorage({
       "jpeg",
       "png",
     ],
-    resource_type: "auto", // Changed from "raw" to "auto" for better handling
+    resource_type: "raw", // Automatically detect file type
+    format: "pdf",
     access_mode: "public", 
     public_id: (req, file) => {
       // Generate unique filename while preserving extension info

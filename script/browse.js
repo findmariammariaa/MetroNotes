@@ -90,4 +90,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial load
   fetchFilteredNotes();
+  
 });

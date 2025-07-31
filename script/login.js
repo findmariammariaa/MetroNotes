@@ -17,10 +17,31 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     if (!response.ok) throw new Error(data.message || "Login failed");
     // Save the token in localStorage
     localStorage.setItem("token", data.token);
-    alert("Login successful!");
     window.location.href = "../home.html";
+    showToast("Login successful!", "success");
 
   } catch (err) {
-    alert(err.message);
+    showToast("Login failed", "error");
   }
+  function showToast(message, type = "success") {
+  const toastContainer = document.getElementById("toast");
+
+  const bg =
+    type === "error"
+      ? "bg-red-500"
+      : type === "success"
+      ? "bg-green-600"
+      : "bg-gray-700";
+
+  const toast = document.createElement("div");
+  toast.className = `alert ${bg} text-white px-4 py-2 rounded shadow mb-2 font-semibold`;
+  toast.innerText = message;
+
+  toastContainer.appendChild(toast);
+
+  // Auto-remove after 3 seconds
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+}
 });

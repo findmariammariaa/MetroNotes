@@ -59,8 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="text-sm text-gray-600 mt-4">
         <div class="space-x-3 flex justify-between items-center">
-          <a href="${note.fileUrl}?fl_attachment=false" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">📄 View</a>
-          <a href="${note.fileUrl}.pdf?fl_attachment=true" download class="text-blue-600 hover:underline">⬇️ Download</a>
+          <a href="${note.fileUrl}.pdf?fl_attachment=false" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">📄 View</a>
+          <a href="${note.fileUrl}?fl_attachment=true" download class="text-blue-600 hover:underline">⬇️ Download</a>
         </div>
       </div>
     `;
@@ -157,16 +157,17 @@ function getDaysAgo(dateStr) {
         const result = await response.json();
 
         if (response.ok) {
-          alert("Note uploaded!");
+          showToast("Note uploaded successfully!", "success");
           form.reset();
           document.getElementById("upload_modal").close();
           loadNotes(); // Optional: reload recently uploaded notes
         } else {
-          alert("Upload failed: " + result.message);
+          showToast("Upload failed: " + result.message, "error");
+
         }
       } catch (err) {
         console.error(err);
-        alert("An error occurred.");
+        showToast("An unexpected error occurred.", "error");
       }
     });
     async function loadRecentNotes() {
@@ -218,8 +219,29 @@ function getDaysAgo(dateStr) {
     });
   } catch (err) {
     console.error("Error loading recent notes:", err);
+    
   }
 }
 
+function showToast(message, type = "success") {
+  const toastContainer = document.getElementById("toast");
 
+  const bg =
+    type === "error"
+      ? "bg-red-500"
+      : type === "success"
+      ? "bg-green-600"
+      : "bg-gray-700";
+
+  const toast = document.createElement("div");
+  toast.className = `alert ${bg} text-white px-4 py-2 rounded shadow mb-2 font-semibold`;
+  toast.innerText = message;
+
+  toastContainer.appendChild(toast);
+
+  // Auto-remove after 3 seconds
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+}
 });

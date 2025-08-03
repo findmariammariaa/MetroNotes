@@ -1,6 +1,7 @@
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
+const path = require("path");
 
 // Validate environment variables before configuring Cloudinary
 const requiredEnvVars = [
@@ -55,7 +56,8 @@ cloudinary.api
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "metronotes", // Folder name in Cloudinary
+    folder: "metronotes",
+    resource_type: "raw",
     allowed_formats: [
       "pdf",
       "doc",
@@ -67,20 +69,10 @@ const storage = new CloudinaryStorage({
       "jpeg",
       "png",
     ],
-    resource_type: "raw", // Automatically detect file type
-    format: "pdf",
-    access_mode: "public", 
     public_id: (req, file) => {
-      // Generate unique filename while preserving extension info
-      const timestamp = Date.now();
-      const originalName = file.originalname.split(".")[0];
-      const extension = file.originalname.split(".").pop();
-      return `${originalName}_${timestamp}`;
-    },
-    // Add format parameter to preserve file extension
-    format: (req, file) => {
-      const extension = file.originalname.split(".").pop().toLowerCase();
-      return extension;
+      const name = path.parse(file.originalname).name; // file name without extension
+      const ext = path.extname(file.originalname).slice(1); // file extension
+      return `${name}_${Date.now()}.${ext}`; // full file name with extension
     },
   },
 });

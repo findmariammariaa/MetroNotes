@@ -18,7 +18,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
       rel="stylesheet"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <style>
       body {
         font-family: "Open Sans", sans-serif;
@@ -48,10 +51,10 @@
       }
       p {
         font-family: "Open Sans", sans-serif;
-        font-size: 1rem; /* Tailwind: text-base */
-        line-height: 1.75rem; /* Tailwind: leading-relaxed */
-        color: #374251; /* Tailwind: text-gray-700 */
-        margin-bottom: 1rem; /* spacing between paragraphs */
+        font-size: 1rem;
+        line-height: 1.75rem;
+        color: #374251;
+        margin-bottom: 1rem;
       }
       .hero-content {
         animation: fadeUp 1.5s ease-out forwards;
@@ -65,6 +68,57 @@
           transform: translateY(0);
         }
       }
+
+      @media (max-width: 1024px) {
+        .hero-content {
+          text-align: center;
+          flex-direction: column !important;
+        }
+
+        .hero-content img {
+          width: 100%;
+          height: auto;
+          max-width: 300px;
+          margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+          line-height: 1.2;
+        }
+
+        .hero-content p {
+          width: 100% !important;
+          font-size: 1rem;
+        }
+
+        .hero-content button {
+          margin-top: 1rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-links,
+        .header-auth {
+          display: none !important;
+        }
+        .header-mobile-menu {
+          display: block;
+        }
+
+        .team-member img {
+          width: 200px !important;
+          height: 200px !important;
+        }
+
+        .text-8xl {
+          font-size: 2.5rem !important;
+        }
+
+        .text-xl {
+          font-size: 1rem !important;
+        }
+      }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -74,9 +128,9 @@
     style="background-image: url('../assets/bg.jpg')"
     class="bg-cover bg-center"
   >
-    <nav id="main-navbar" class="bg-gray-400 shadow-lg">
+    <nav id="main-navbar" class="bg-gray-400 shadow-lg sticky top-0 z-50">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
-        <div class="flex justify-between items-center p-4">
+        <div class="flex justify-between items-center lg:p-4 sm:py-4">
           <!-- ====== LOGO SECTION ====== -->
           <div class="header-logo flex-shrink-0">
             <a class="text-3xl font-bold text-indigo-950" href="../index.html"
@@ -124,64 +178,82 @@
             </button>
           </div>
 
-          <!-- ====== MOBILE MENU BUTTON ====== -->
-          <div class="lg:hidden">
-            <button id="menu-btn" class="btn btn-ghost">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-indigo-950"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
+    <!-- ====== MOBILE MENU BUTTON WITH DROPDOWN ====== -->
+    <div class="lg:hidden dropdown dropdown-end">
+      <button tabindex="0" role="button" class="btn btn-ghost p-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-indigo-950"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
 
-      <!-- ====== MOBILE MENU SECTION ====== -->
-      <div
-        id="mobile-menu"
-        class="header-mobile-menu hidden lg:hidden px-4 pb-4 space-y-2"
+      <!-- ====== DROPDOWN MENU ITEMS ====== -->
+      <ul
+        tabindex="0"
+        class="dropdown-content menu bg-base-100 rounded-box shadow-lg w-56 z-[100] mt-2 p-2 space-y-2"
       >
-        <a
-          href="home.html"
-          class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
-          >Home</a
-        >
-        <a
-          href="features.html"
-          class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
-          >Features</a
-        >
-        <a
-          href="about.html"
-          class="block px-3 py-2 text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md text-base"
-          >About</a
-        >
-        <button class="btn btn-outline w-full text-xl">Login</button>
-        <button class="btn btn-primary w-full bg-red-800 text-xl text-white">
-          Sign Up
-        </button>
-      </div>
+        <li>
+          <a
+            href="#hero"
+            class="text-indigo-950 hover:bg-gray-700 hover:text-white text-base"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="#feature"
+            class="text-indigo-950 hover:bg-gray-700 hover:text-white text-base"
+            >Features</a
+          >
+        </li>
+        <li>
+          <a
+            href="#about"
+            class="text-indigo-950 hover:bg-gray-700 hover:text-white text-base"
+            >About</a
+          >
+        </li>
+        <li>
+          <a href="./others/login.html">
+            <button class="btn btn-outline w-full text-base mb-1">Login</button>
+          </a>
+        </li>
+        <li>
+          <a href="./others/signup.html">
+            <button class="btn btn-primary w-full bg-red-800 text-white text-base">
+              Sign Up
+            </button>
+          </a>
+        </li>
+      </ul>
+    </div>
+
     </nav>
 
     <!-- hero section -->
     <div class="hero bg-gray-250 min-h-screen">
-      <div class="hero-content flex-col lg:flex-row ">
-        <img src="./utilities/image.png" class="max-w-screen-2xl rounded-lg" />
+      <div
+        class="hero-content flex  lg:flex-row items-center text-center lg:text-left gap-6 px-4"
+      >
+        <img
+          src="./utilities/image.png"
+          class="w-full max-w-xs sm:max-w-md lg:max-w-xl rounded-lg mx-auto"
+        />
         <div>
           <h1 class="text-8xl font-bold text-indigo-950">
             Your Student Note-Sharing App
           </h1>
-          <p class="py-6 text-xl w-3/4 text-indigo-950">
+          <p class="py-6 text-xl w-full max-w-lg  text-indigo-950 justify-start">
             Welcome to MetroNotes- Your digital notebook tailored for students
             at Metropolitan University
           </p>
@@ -196,7 +268,7 @@
     </div>
 
     <!-- Features Section -->
-    <section class=" px-4 max-w-7xl mx-auto" id="feature">
+    <section class="px-4 max-w-7xl mx-auto" id="feature">
       <h2
         class="text-4xl font-bold mb-12 text-center text-gray-800 font-poppins"
       >
@@ -308,10 +380,9 @@
     <!-- About Section -->
     <section class="flex-grow mx-auto" id="about">
       <section class="py-16 px-6 sm:px-10 max-w-7xl mx-auto text-center">
-        
-          <h2 class="text-3xl sm:text-4xl font-bold mb-6">About MetroNotes</h2>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">About MetroNotes</h2>
         <div
-          class=" bg-gray-100 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-blue-600"
+          class="bg-gray-100 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-blue-600"
         >
           <p class="text-base sm:text-lg leading-relaxed text-gray-800">
             MetroNotes is a student-built platform created to make academic life
@@ -334,7 +405,7 @@
           <div class="grid gap-10 sm:grid-cols-2">
             <!-- Team Member 1 -->
             <div
-              class=" bg-gradient-to-r from-blue-200 via-blue-500 to-blue-900 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-red-600"
+              class="bg-gradient-to-r from-blue-200 via-blue-500 to-blue-900 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-red-600"
             >
               <a
                 href="https://github.com/findmariammariaa"
@@ -353,7 +424,7 @@
 
             <!-- Team Member 2 -->
             <div
-              class="bg-gradient-to-r from-red-300 via-red-600 to-red-900 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-gray-600"
+              class="bg-gradient-to-r from-green-300 via-green-600 to-green-900 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-gray-600"
             >
               <a
                 href="https://github.com/Prattaymu10"
@@ -373,6 +444,7 @@
         </div>
       </section>
     </section>
+
   </body>
   <!-- footer -->
   <div id="footer"></div>

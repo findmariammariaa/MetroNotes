@@ -18,6 +18,11 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
       rel="stylesheet"
     />
+    <!-- Add this line in <head> if not already included -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
     <style>
       body {
@@ -59,74 +64,78 @@
   </head>
 
 
-<body style="background-image: url('../assets/bg.jpg');" class="bg-cover bg-center">
-    <nav id="main-navbar" class="bg-gray-400 shadow-lg sticky top-0 z-50">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
-        <div class="flex justify-between items-center p-4">
-          <!-- ====== LOGO SECTION ====== -->
-          <div class="header-logo flex-shrink-0">
-            <a class="text-3xl font-bold text-indigo-950" href="./index.html"
-              >MetroNotes</a
-            >
-          </div>
+<body style="background-image: url('../assets/bg.jpg');" class="bg-cover bg-center mx-auto">
+<nav class="bg-gray-400 shadow-lg sticky top-0 z-50">
+  <div class="navbar mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
+    
+    <!-- LOGO -->
+    <div class="flex-1">
+      <a class="text-3xl font-bold text-indigo-950" href="./index.html">
+        MetroNotes
+      </a>
+    </div>
 
-          <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
-          <div class="header-auth hidden lg:flex space-x-4 items-center">
+    <!-- DESKTOP AUTH BUTTON -->
+    <div class="hidden lg:flex">
+      <button
+        id="logoutBtn"
+        class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
+      >
+        Log Out
+      </button>
+    </div>
 
+    <!-- MOBILE MENU BUTTON -->
+    <div class="dropdown dropdown-end lg:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-indigo-950"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </div>
+
+      <!-- MOBILE DROPDOWN MENU -->
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-300 rounded-box w-52 space-y-2"
+      >
+        <li>
+          <a class="btn btn-ghost text-xl" href="./others/browse.html">
+            Browse Notes
+          </a>
+        </li>
+        <li>
+          <button
+            class="btn btn-ghost text-xl"
+            onclick="upload_modal.showModal()"
+          >
+            Upload Notes
+          </button>
+        </li>
+        <li>
+          <a href="./index.html">
             <button
-              id="logoutBtn"
-              class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
+              class="btn bg-blue-950 rounded-md text-white login-btn text-xl w-full"
             >
               Log Out
             </button>
-          </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-          <!-- ====== MOBILE MENU BUTTON ====== -->
-          <div class="lg:hidden">
-            <button id="menu-btn" class="btn btn-ghost">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-indigo-950"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- ====== MOBILE MENU SECTION ====== -->
-      <div
-        id="mobile-menu"
-        class="header-mobile-menu hidden lg:hidden px-4 pb-4 space-y-2"
-      >
-        <a class="btn btn-ghost text-xl" href="./others/browse.html"
-          >Browse Notes</a
-        >
-        <button
-          class="btn btn-ghost text-xl"
-          onclick="upload_modal.showModal()"
-        >
-          Upload Notes
-        </button>
-
-        <a href="./index.html">
-          <button
-            class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
-          >
-            Log Out
-          </button>
-        </a>
-      </div>
-    </nav>
 
     <!-- ✅ Hero Section -->
     <section class="text-center px-4 py-16 max-w-3xl mx-auto">
@@ -165,12 +174,12 @@
     </section>
 
     <!-- ✅ Updated "Browse by Department" Section -->
-    <section class="max-w-6xl mx-auto px-4 py-12">
+    <section class="max-w-6xl mx-auto px-4 lg:py-12">
       <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
         Browse by Department
       </h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <!-- CSE -->
         <button data-dept="CSE"
           class="dept-btn border-blue-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
@@ -258,17 +267,17 @@
         Featured Notes
       </h2>
 
-      <div id="notes-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div id="notes-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- Note Card Template -->
 
         <!-- Repeat Note Cards as needed -->
       </div>
     </section>
           <section class="max-w-6xl mx-auto px-4 py-12">
-      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
+      <h2 class="lg:text-3xl text-2xl font-bold text-center mb-10 text-gray-800">
         Recently Uploaded Notes
       </h2>
-      <div id="recent-uploads" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div id="recent-uploads" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
         <!-- recent Note Card Template -->
 
 

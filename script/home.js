@@ -37,19 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const daysAgo = getDaysAgo(note.createdAt);
     const card = document.createElement("div");
     card.className =
-      "bg-white border border-gray-200 rounded-xl p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer";
+      "bg-white border border-gray-200 rounded-md lg:rounded-xl lg:p-6 p-2 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer";
 
     card.innerHTML = `
-      <div class="mb-4">
-        <h2 class="text-2xl font-bold text-gray-800">${note.courseName}</h2>
+      <div class="lg:mb-4">
+        <h2 class="lg:text-2xl text-lg font-bold text-gray-800">${note.courseName}</h2>
         <p class="text-sm text-gray-600">${note.courseCode} – ${note.title || ""} ${note.section || ""}</p>
         <p class="text-sm text-gray-600">
           Department: <span class="font-medium text-gray-700">${note.department}</span>
         </p>
       </div>
 
-      <p class="text-sm text-gray-600 mb-4">
-        Uploaded by: <span class="font-medium text-gray-700">${note.uploaderName || "Anonymous"}</span>
+      <p class="text-sm text-gray-600 lg:mb-4">
+        Uploaded by: <span class="font-bold text-gray-700">${note.uploaderName || "Anonymous"}</span>
       </p>
 
       <div class="text-sm">

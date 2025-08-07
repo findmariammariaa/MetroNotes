@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const departmentFilter = document.getElementById("filter-department");
+  // ✅ Read 'department' query param and set filter
+const params = new URLSearchParams(window.location.search);
+const departmentFromURL = params.get("department");
+
+if (departmentFromURL) {
+  departmentFilter.value = departmentFromURL;
+}
+
   const courseFilter = document.getElementById("filter-course");
   const searchInput = document.getElementById("filter-search");
   const notesGrid = document.getElementById("notes-grid");
@@ -45,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       card.innerHTML = `
         <div class="mb-4">
-          <h2 class="text-2xl font-bold text-gray-800">Course: ${
+          <h2 class="text-2xl font-bold text-gray-800">${
             note.courseName
           }</h2>
           <p class="text-sm text-gray-600">${note.courseCode} – ${

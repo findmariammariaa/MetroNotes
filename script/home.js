@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function createNoteCard(note, { showDownloads, showUploadedDate }) {
+  function createNoteCard(note, { showDownloads, showUploadedDate }){
     const daysAgo = getDaysAgo(note.createdAt);
     const card = document.createElement("div");
     card.className =
@@ -244,4 +244,11 @@ function showToast(message, type = "success") {
     toast.remove();
   }, 3000);
 }
+  document.querySelectorAll(".dept-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const selectedDept = btn.getAttribute("data-dept");
+      // Redirect to browse page with department filter
+      window.location.href = `../others/browse.html?department=${encodeURIComponent(selectedDept)}`;
+    });
+  });
 });

@@ -58,7 +58,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
-  <body class="bg-gray-100">
+
+<body style="background-image: url('../assets/bg.jpg');" class="bg-cover bg-center">
     <nav id="main-navbar" class="bg-gray-400 shadow-lg sticky top-0 z-50">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
         <div class="flex justify-between items-center p-4">
@@ -71,15 +72,6 @@
 
           <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
           <div class="header-auth hidden lg:flex space-x-4 items-center">
-            <a class="btn btn-ghost text-xl" href="./others/browse.html"
-              >Browse Notes</a
-            >
-            <button
-              class="btn btn-ghost text-xl"
-              onclick="upload_modal.showModal()"
-            >
-              Upload Notes
-            </button>
 
             <button
               id="logoutBtn"
@@ -180,8 +172,8 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <!-- CSE -->
-        <div
-          class="border-blue-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        <button data-dept="CSE"
+          class="dept-btn border-blue-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios-filled/50/1e40af/laptop-coding.png"
@@ -191,11 +183,11 @@
           <p class="text-md font-semibold text-gray-800">
             Computer Science & Engineering
           </p>
-        </div>
+        </button>
 
         <!-- EEE -->
-        <div
-          class="border-gray-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        <button data-dept="EEE"
+          class="dept-btn border-gray-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/electrical.png"
@@ -205,11 +197,11 @@
           <p class="text-md font-semibold text-gray-800">
             Electrical & Electronic Engineering
           </p>
-        </div>
+        </button>
 
         <!-- BBA -->
-        <div
-          class="border-red-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        <button data-dept="BBA"
+          class="dept-btn border-red-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/business.png"
@@ -219,11 +211,11 @@
           <p class="text-md font-semibold text-gray-800">
             Business Administration
           </p>
-        </div>
+        </button>
 
         <!-- English -->
-        <div
-          class="border-green-900 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        <button data-dept="ENG"
+          class="dept-btn border-green-900 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/book.png"
@@ -231,11 +223,11 @@
             alt="English"
           />
           <p class="text-md font-semibold text-gray-800">English</p>
-        </div>
+        </button>
 
         <!-- Law -->
-        <div
-          class="border-red-900 border-t-8 bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        <button data-dept="Law"
+          class="dept-btn border-red-900 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios/50/1e40af/scales.png"
@@ -243,11 +235,11 @@
             alt="Law"
           />
           <p class="text-md font-semibold text-gray-800">Law</p>
-        </div>
+        </button>
 
         <!-- Software Engineering -->
-        <div
-          class="border-purple-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        <button data-dept="SWE"
+          class="dept-btn border-purple-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
         >
           <img
             src="https://img.icons8.com/ios-filled/50/1e40af/source-code.png"
@@ -257,7 +249,7 @@
           <p class="text-md font-semibold text-gray-800">
             Software Engineering
           </p>
-        </div>
+        </b>
       </div>
     </section>
     <!-- ✅ Updated "Featured Notes" Section -->
@@ -288,7 +280,7 @@
     <!-- Upload Notes Modal -->
     <dialog id="upload_modal" class="modal">
       <div class="modal-box w-11/12 max-w-2xl bg-white">
-        <h3 class="font-bold text-2xl mb-4 text-center text-indigo-950">
+        <h3 class="font-bold text-2xl text-center text-indigo-950">
           Upload Notes
         </h3>
         <form method="dialog">
@@ -298,10 +290,10 @@
             ✕
           </button>
         </form>
-        <p class="text-gray-600 mb-6 text-center">
+        <p class="text-gray-600  text-center">
           Share your notes with the MetroNotes community!
         </p>
-        <form method="dialog" class="space-y-4" id="uploadForm">
+        <form method="dialog" class="space-y-0.5" id="uploadForm">
           <div>
             <label class="block mb-1 text-sm font-medium text-gray-700"
               >Your Name</label

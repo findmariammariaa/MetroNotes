@@ -52,13 +52,11 @@
         margin-bottom: 1rem; /* spacing between paragraphs */
       }
     </style>
-
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
-
-
-  <body class="bg-gray-100">
+<body style="background-image: url('../assets/bg.jpg');" class="bg-cover bg-center">
     <nav id="main-navbar" class="bg-gray-400 shadow-lg sticky top-0 z-50">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
         <div class="flex justify-between items-center p-4">
@@ -120,13 +118,20 @@
   
   
   <!-- Browse Notes Page -->
-<section class="min-h-screen bg-gray-50 py-16 px-6">
+<section class="min-h-screen py-16 px-6">
   <div class="max-w-7xl mx-auto ">
     <h1 class="text-4xl font-bold text-center text-navy-800 mb-12">Browse Notes</h1>
 
 <!-- Filters -->
-<div class="flex flex-wrap justify-center gap-4 mb-10">
-  <select id="filter-department" class="select input-bordered  text-black bg-white placeholder-gray-500 border-black focus:outline-none focus:ring-2 focus:ring-blue-400">
+<div class="flex flex-wrap justify-center gap-4 mb-10 w-full max-w-3xl mx-auto">
+    
+  <input
+    type="text"
+    id="filter-search"
+    placeholder="Search notes..."
+    class="input p-2 input-bordered w-full max-w-md text-black bg-white placeholder-gray-500 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+  <select id="filter-department" class="select p-2 input-bordered  text-black bg-white placeholder-gray-500 border-black focus:outline-none focus:ring-2 focus:ring-blue-400">
     <option value="">All Departments</option>
     <option value="CSE">CSE</option>
     <option value="BBA">BBA</option>
@@ -205,13 +210,7 @@
 </optgroup>
 
   </select>
-  
-  <input
-    type="text"
-    id="filter-search"
-    placeholder="Search notes..."
-    class="input input-bordered w-full max-w-md text-black bg-white placeholder-gray-500 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
-  />
+
 </div>
 
 
@@ -232,8 +231,73 @@
     </div>
   </div>
 </section>
-  <!-- footer -->
-  <div id="footer"></div>
+    <footer class="bg-gray-400">
+      <div
+        class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-indigo-950"
+      >
+        <!-- About Section -->
+        <div>
+          <h2 class="logo text-2xl font-bold mb-4">MetroNotes</h2>
+          <p class="text-base">
+            MetroNotes is your digital companion for note-taking and resource
+            sharing among Metropolitan University students.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h2 class="text-xl font-semibold mb-4">Quick Links</h2>
+          <ul class="grid grid-cols-1 md:grid-cols-5 space-y-2">
+            <li>
+              <a href="../index.html" class="hover:underline hover:text-white"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="../others/features.html" class="hover:underline hover:text-white"
+                >Features</a
+              >
+            </li>
+            <li>
+              <a href="../others/about.html" class="hover:underline hover:text-white"
+                >About</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-xl font-semibold mb-4">Contact Us</h2>
+          <p>
+            Email:
+            <a
+              href="mailto:support@metronotes.com"
+              class="hover:underline hover:text-white"
+              >support@metronotes.com</a
+            >
+          </p>
+          <p>Phone: +880-1234-567890</p>
+          <p>Location: Metropolitan University, Sylhet</p>
+        </div>
+      </div>
+
+      <!-- Bottom Footer -->
+      <div class="text-center py-4 bg-gray-500 text-white text-sm">
+        © 2025 MetroNotes. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+
   <script src="../loader.js"></script>
   <script src="../script/browse.js"></script>
 </html>

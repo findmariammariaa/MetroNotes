@@ -14,34 +14,34 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // === API BASE URL ===
-  const API_BASE_URL = 'http://localhost:5000/api/auth';
+  const API_BASE_URL = "https://metronotes.onrender.com";
 
   async function checkAuthStatus() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) return false;
     try {
       const response = await fetch(`${API_BASE_URL}/profile`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       });
       if (response.ok) return true;
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return false;
     } catch (error) {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return false;
     }
   }
 
   // === ATTACH HANDLER TO getStartedBtn (hero section) ===
-  const getStartedBtn = document.getElementById('getStartedBtn');
+  const getStartedBtn = document.getElementById("getStartedBtn");
   if (getStartedBtn) {
-    getStartedBtn.addEventListener('click', async () => {
+    getStartedBtn.addEventListener("click", async () => {
       const isLoggedIn = await checkAuthStatus();
-      window.location.href = isLoggedIn ? '/home.html' : '/others/login.html';
+      window.location.href = isLoggedIn ? "/home.html" : "/others/login.html";
     });
   }
 
@@ -86,11 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ✅ ATTACH HANDLER TO getStartedBtn2 AFTER header is loaded
-    const getStartedBtn2 = document.getElementById('getStartedBtn2');
+    const getStartedBtn2 = document.getElementById("getStartedBtn2");
     if (getStartedBtn2) {
-      getStartedBtn2.addEventListener('click', async () => {
+      getStartedBtn2.addEventListener("click", async () => {
         const isLoggedIn = await checkAuthStatus();
-        window.location.href = isLoggedIn ? '/home.html' : '/others/login.html';
+        window.location.href = isLoggedIn ? "/home.html" : "/others/login.html";
       });
     }
   });

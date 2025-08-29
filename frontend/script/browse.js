@@ -34,7 +34,7 @@ if (departmentFromURL) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/notes?${queryParams.toString()}`
+        `https://metronotes.onrender.com/api/notes?${queryParams.toString()}`
       );
       const data = await response.json();
       renderNotes(data.notes);
@@ -77,7 +77,7 @@ if (departmentFromURL) {
 
         <div class="flex gap-4 text-sm">
         <a 
-          href="http://localhost:5000/api/notes/view/${note._id}" 
+          href="https://metronotes.onrender.com/api/notes/view/${note._id}" 
           target="_blank" 
           rel="noopener noreferrer"
           class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
@@ -86,7 +86,7 @@ if (departmentFromURL) {
         </a>
 
         <a 
-          href="http://localhost:5000/api/notes/download/${note._id}" 
+          href="https://metronotes.onrender.com/api/notes/download/${note._id}" 
           target="_blank"
           class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
         >

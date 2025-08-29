@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // === API BASE URL ===
-  const API_BASE_URL = "https://metronotes.onrender.com";
+  const API_BASE_URL = "https://metronotes.onrender.com/api/auth";
 
   async function checkAuthStatus() {
     const token = localStorage.getItem("token");

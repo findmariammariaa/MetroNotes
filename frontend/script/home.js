@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadNotes() {
     try {
-      const response = await fetch("http://localhost:5000/api/notes");
+      const response = await fetch("https://metronotes.onrender.com/api/notes");
       const data = await response.json();
       const notes = data.notes || [];
 
@@ -90,7 +90,7 @@ function getDaysAgo(dateStr) {
     return;
   }
 
-  fetch("http://localhost:5000/api/auth/profile", {
+  fetch("https://metronotes.onrender.com/api/auth/profile", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -146,7 +146,7 @@ function getDaysAgo(dateStr) {
       formData.append("title", form.querySelector('input[name="title"]').value); // text
 
       try {
-        const response = await fetch("http://localhost:5000/api/notes/upload", {
+        const response = await fetch("https://metronotes.onrender.com/api/notes/upload", {
           method: "POST",
           body: formData,
           headers: {
@@ -174,7 +174,7 @@ function getDaysAgo(dateStr) {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch("http://localhost:5000/api/notes/recent", {
+    const response = await fetch("https://metronotes.onrender.com/api/notes/recent", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -208,7 +208,7 @@ function getDaysAgo(dateStr) {
             ${note.title}
           </h3>
           <p class="text-sm text-gray-600">Uploaded ${daysAgo}</p>
-          <a href="http://localhost:5000/uploads/${note.file}" 
+          <a href="https://metronotes.onrender.com/uploads/${note.file}" 
              class="text-blue-600 underline text-sm mt-2 inline-block" download>
             Download
           </a>

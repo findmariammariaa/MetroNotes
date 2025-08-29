@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="./utilities/fav.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Add this line in <head> if not already included -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+      .logo {
+        font-family: "Poppins", serif;
+        font-weight: 700;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Montserrat", sans-serif;
+      }
+      h6 {
+        color: #f1fff9;
+      }
+
+      .heading {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .body-font {
+        font-family: "Open Sans", sans-serif;
+      }
+      p {
+        font-family: "Open Sans", sans-serif;
+        font-size: 1rem; /* Tailwind: text-base */
+        line-height: 1.75rem; /* Tailwind: leading-relaxed */
+        color: #374251; /* Tailwind: text-gray-700 */
+        margin-bottom: 1rem; /* spacing between paragraphs */
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+
+<body style="background-image: url('../assets/bg.jpg');" class="bg-cover bg-center mx-auto">
+<nav class="bg-gray-400 shadow-lg sticky top-0 z-50">
+  <div class="navbar mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
+    
+    <!-- LOGO -->
+    <div class="flex-1">
+      <a class="text-3xl font-bold text-indigo-950" href="./index.html">
+        MetroNotes
+      </a>
+    </div>
+
+    <!-- DESKTOP AUTH BUTTON -->
+    <div class="hidden lg:flex">
+      <button
+        id="logoutBtn"
+        class="btn bg-blue-950 rounded-md text-white login-btn text-xl"
+      >
+        Log Out
+      </button>
+    </div>
+
+    <!-- MOBILE MENU BUTTON -->
+    <div class="dropdown dropdown-end lg:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-indigo-950"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </div>
+
+      <!-- MOBILE DROPDOWN MENU -->
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-300 rounded-box w-52 space-y-2"
+      >
+        <li>
+          <a class="btn btn-ghost text-xl" href="./others/browse.html">
+            Browse Notes
+          </a>
+        </li>
+        <li>
+          <button
+            class="btn btn-ghost text-xl"
+            onclick="upload_modal.showModal()"
+          >
+            Upload Notes
+          </button>
+        </li>
+        <li>
+          <a href="./index.html">
+            <button
+              class="btn bg-blue-950 rounded-md text-white login-btn text-xl w-full"
+            >
+              Log Out
+            </button>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- ✅ Hero Section -->
+    <section class="text-center px-4 py-16 max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to MetroNotes</h1>
+      <p class="text-lg mb-6">
+        A note-sharing platform for Metropolitan University students across all
+        departments.
+      </p>
+
+      <!-- Search Bar -->
+      <div
+        class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-6"
+      >
+        <input
+          type="text"
+          id="filter-search"
+          placeholder="Search notes by department or course"
+          class="input input-bordered w-full max-w-md text-black bg-white placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <button class="btn btn-primary w-full sm:w-auto">Search</button>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-2">
+        <button
+          class="btn bg-green-500 text-white hover:bg-green-600"
+          onclick="upload_modal.showModal()"
+        >
+          Upload Notes
+        </button>
+
+        <button class="btn bg-blue-600 text-white hover:bg-blue-700">
+          <a href="./others/browse.html">Browse Notes</a>
+        </button>
+      </div>
+    </section>
+
+    <!-- ✅ Updated "Browse by Department" Section -->
+    <section class="max-w-6xl mx-auto px-4 lg:py-12">
+      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
+        Browse by Department
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- CSE -->
+        <button data-dept="CSE"
+          class="dept-btn border-blue-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios-filled/50/1e40af/laptop-coding.png"
+            class="w-12 h-12 mb-4"
+            alt="CSE"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Computer Science & Engineering
+          </p>
+        </button>
+
+        <!-- EEE -->
+        <button data-dept="EEE"
+          class="dept-btn border-gray-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/electrical.png"
+            class="w-12 h-12 mb-4"
+            alt="EEE"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Electrical & Electronic Engineering
+          </p>
+        </button>
+
+        <!-- BBA -->
+        <button data-dept="BBA"
+          class="dept-btn border-red-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/business.png"
+            class="w-12 h-12 mb-4"
+            alt="BBA"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Business Administration
+          </p>
+        </button>
+
+        <!-- English -->
+        <button data-dept="ENG"
+          class="dept-btn border-green-900 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/book.png"
+            class="w-12 h-12 mb-4"
+            alt="English"
+          />
+          <p class="text-md font-semibold text-gray-800">English</p>
+        </button>
+
+        <!-- Law -->
+        <button data-dept="Law"
+          class="dept-btn border-red-900 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios/50/1e40af/scales.png"
+            class="w-12 h-12 mb-4"
+            alt="Law"
+          />
+          <p class="text-md font-semibold text-gray-800">Law</p>
+        </button>
+
+        <!-- Software Engineering -->
+        <button data-dept="SWE"
+          class="dept-btn border-purple-800 border-t-8 border rounded-lg p-6 shadow hover:shadow-lg transition-all hover:scale-105 cursor-pointer flex flex-col items-center text-center"
+        >
+          <img
+            src="https://img.icons8.com/ios-filled/50/1e40af/source-code.png"
+            class="w-12 h-12 mb-4"
+            alt="Software Engineering"
+          />
+          <p class="text-md font-semibold text-gray-800">
+            Software Engineering
+          </p>
+        </b>
+      </div>
+    </section>
+    <!-- ✅ Updated "Featured Notes" Section -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
+        Featured Notes
+      </h2>
+
+      <div id="notes-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Note Card Template -->
+
+        <!-- Repeat Note Cards as needed -->
+      </div>
+    </section>
+          <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="lg:text-3xl text-2xl font-bold text-center mb-10 text-gray-800">
+        Recently Uploaded Notes
+      </h2>
+      <div id="recent-uploads" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <!-- recent Note Card Template -->
+
+
+    </section>
+<div id="toast" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <!-- footer -->
+    <div id="footer"></div>
+    <!-- Upload Notes Modal -->
+    <dialog id="upload_modal" class="modal">
+      <div class="modal-box w-11/12 max-w-2xl bg-white">
+        <h3 class="font-bold text-2xl text-center text-indigo-950">
+          Upload Notes
+        </h3>
+        <form method="dialog">
+          <button
+            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+        </form>
+        <p class="text-gray-600  text-center">
+          Share your notes with the MetroNotes community!
+        </p>
+        <form method="dialog" class="space-y-0.5" id="uploadForm">
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Your Name</label
+            >
+            <input
+              type="text"
+              placeholder="Anonymous"
+              class="input input-bordered w-full"
+              name="uploaderName"
+               required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Your ID</label
+            >
+            <input
+              type="text"
+              placeholder="222-115-218"
+              class="input input-bordered w-full"
+              name="uploaderId"
+               required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Department</label
+            >
+            <select class="select select-bordered w-full" name="department"  required>
+              <option>CSE</option>
+              <option>BBA</option>
+              <option>ENG</option>
+              <option>SWE</option>
+              <option>Law</option>
+              <option>EEE</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Course Name</label
+            >
+            <input
+              type="text"
+              placeholder="E.g., Data Structures"
+              class="input input-bordered w-full"
+              name="courseName"
+               required
+            />
+          </div>
+                    <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Batch and Section</label
+            >
+            <input
+              type="text"
+              placeholder="E.g., 57F, 57G"
+              class="input input-bordered w-full"
+              name="title"
+               required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Course Code</label
+            >
+            <input
+              type="text"
+              placeholder="E.g., CSE-231"
+              class="input input-bordered w-full"
+              name="courseCode"
+              required
+            />
+          </div>
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700"
+              >Upload PDF</label
+            >
+            <input
+              type="file"
+              accept=".pdf"
+              class="file-input file-input-bordered w-full"
+              required
+              name="file"
+            />
+          </div>
+          <div class="modal-action">
+            <button class="btn bg-red-900 text-white hover:bg-red-800 w-full" type="submit">
+              Upload Note
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <script src="./loader.js"></script>
+    <script src="../script/home.js"></script>
+    <script src="./script/browse.js"></script>
+  </body>
+</html>

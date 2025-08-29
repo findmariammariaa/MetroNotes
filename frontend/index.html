@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="./utilities/fav.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+      .logo {
+        font-family: "Poppins", serif;
+        font-weight: 700;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Montserrat", sans-serif;
+      }
+      h6 {
+        color: #f1fff9;
+      }
+
+      .heading {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .body-font {
+        font-family: "Open Sans", sans-serif;
+      }
+      p {
+        font-family: "Open Sans", sans-serif;
+        font-size: 1rem;
+        line-height: 1.75rem;
+        color: #374251;
+        margin-bottom: 1rem;
+      }
+      .hero-content {
+        animation: fadeUp 1.5s ease-out forwards;
+        opacity: 0;
+        transform: translateY(60px);
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .hero-content {
+          text-align: center;
+          flex-direction: column !important;
+        }
+
+        .hero-content img {
+          width: 100%;
+          height: auto;
+          max-width: 300px;
+          margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+          line-height: 1.2;
+        }
+
+        .hero-content p {
+          width: 100% !important;
+          font-size: 1rem;
+        }
+
+        .hero-content button {
+          margin-top: 1rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-links,
+        .header-auth {
+          display: none !important;
+        }
+        .header-mobile-menu {
+          display: block;
+        }
+
+        .team-member img {
+          width: 200px !important;
+          height: 200px !important;
+        }
+
+        .text-8xl {
+          font-size: 2.5rem !important;
+        }
+
+        .text-xl {
+          font-size: 1rem !important;
+        }
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body
+    style="background-image: url('../assets/bg.jpg')"
+    class="bg-cover bg-center"
+  >
+    <nav id="main-navbar" class="bg-gray-400 shadow-lg sticky top-0 z-50">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-1">
+        <div class="flex justify-between items-center lg:p-4 sm:py-4">
+          <!-- ====== LOGO SECTION ====== -->
+          <div class="header-logo flex-shrink-0">
+            <a class="text-3xl font-bold text-indigo-950" href="../index.html"
+              >MetroNotes</a
+            >
+          </div>
+
+          <!-- ====== DESKTOP NAV LINKS SECTION ====== -->
+          <div class="header-links hidden lg:flex space-x-4 items-center">
+            <a
+              id="getStartedBtn2"
+              class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+              >Home</a
+            >
+            <a
+              href="#feature"
+              class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+              >Features</a
+            >
+            <a
+              href="#about"
+              class="px-3 py-2 text-xl font-medium text-indigo-950 hover:bg-gray-700 hover:text-white rounded-md"
+              >About</a
+            >
+          </div>
+
+          <!-- ====== DESKTOP AUTH BUTTONS SECTION ====== -->
+          <div class="header-auth hidden lg:flex space-x-4 items-center">
+            <a href="../others/login.html">
+              <button class="btn btn-outline login-btn text-xl">Login</button>
+            </a>
+            <a href="../others/signup.html">
+              <button
+                class="btn btn-primary signup-btn bg-red-800 text-white text-xl hover:bg-red-900"
+              >
+                Sign Up
+              </button>
+            </a>
+
+            <button
+              class="btn btn-outline text-xl logout-btn"
+              style="display: none"
+            >
+              Logout
+            </button>
+          </div>
+
+    <!-- ====== MOBILE MENU BUTTON WITH DROPDOWN ====== -->
+    <div class="lg:hidden dropdown dropdown-end">
+      <button tabindex="0" role="button" class="btn btn-ghost p-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-indigo-950"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      <!-- ====== DROPDOWN MENU ITEMS ====== -->
+      <ul
+        tabindex="0"
+        class="dropdown-content menu bg-base-100 rounded-box shadow-lg w-56 z-[100] mt-2 p-2 space-y-2"
+      >
+        <li>
+          <a
+            href="#hero"
+            class="text-indigo-950 hover:bg-gray-700 hover:text-white text-base"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="#feature"
+            class="text-indigo-950 hover:bg-gray-700 hover:text-white text-base"
+            >Features</a
+          >
+        </li>
+        <li>
+          <a
+            href="#about"
+            class="text-indigo-950 hover:bg-gray-700 hover:text-white text-base"
+            >About</a
+          >
+        </li>
+        <li>
+          <a href="./others/login.html">
+            <button class="btn btn-outline w-full text-base mb-1">Login</button>
+          </a>
+        </li>
+        <li>
+          <a href="./others/signup.html">
+            <button class="btn btn-primary w-full bg-red-800 text-white text-base">
+              Sign Up
+            </button>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    </nav>
+
+    <!-- hero section -->
+    <div class="hero bg-gray-250 min-h-screen">
+      <div
+        class="hero-content flex  lg:flex-row items-center text-center lg:text-left gap-6 px-4"
+      >
+        <img
+          src="./utilities/image.png"
+          class="w-full max-w-xs sm:max-w-md lg:max-w-xl rounded-lg mx-auto"
+        />
+        <div>
+          <h1 class="text-8xl font-bold text-indigo-950">
+            Your Student Note-Sharing App
+          </h1>
+          <p class="py-6 text-xl w-full max-w-lg  text-indigo-950 justify-start">
+            Welcome to MetroNotes- Your digital notebook tailored for students
+            at Metropolitan University
+          </p>
+          <button
+            id="getStartedBtn"
+            class="btn btn-primary bg-blue-950 p-5 text-lg text-white font-bold hover:bg-blue-900 rounded-lg"
+          >
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="px-4 max-w-7xl mx-auto" id="feature">
+      <h2
+        class="text-4xl font-bold mb-12 text-center text-gray-800 font-poppins"
+      >
+        Key Features
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Feature Card -->
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-red-600"
+        >
+          <div
+            class="w-12 h-12 bg-red-100 text-red-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+          >
+            🔍
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+            Smart Search
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            Quickly find notes by department or course with our intuitive search
+            bar.
+          </p>
+        </div>
+
+        <!-- Repeat this structure for each card -->
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-blue-600"
+        >
+          <div
+            class="w-12 h-12 bg-blue-100 text-blue-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+          >
+            📤
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+            Easy Upload
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            Share your notes with a simple upload feature to help fellow
+            students.
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-green-600"
+        >
+          <div
+            class="w-12 h-12 bg-green-100 text-green-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+          >
+            📚
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+            Department-Wise Categorization
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            Access content tailored to your specific academic department.
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-yellow-500"
+        >
+          <div
+            class="w-12 h-12 bg-yellow-100 text-yellow-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+          >
+            💬
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+            Anonymous Sharing
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            Upload or download notes without the need to reveal your identity.
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-purple-600"
+        >
+          <div
+            class="w-12 h-12 bg-purple-100 text-purple-600 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+          >
+            📈
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+            Trending & Recent
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            Explore the most downloaded and freshly added notes anytime.
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-gray-600"
+        >
+          <div
+            class="w-12 h-12 bg-gray-200 text-gray-700 text-3xl flex items-center justify-center rounded-full mb-4 shadow-md"
+          >
+            🔐
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 font-poppins">
+            Secure & Accessible
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            Your notes are stored safely and are accessible 24/7 across devices.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="flex-grow mx-auto" id="about">
+      <section class="py-16 px-6 sm:px-10 max-w-7xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">About MetroNotes</h2>
+        <div
+          class="bg-gray-100 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-blue-600"
+        >
+          <p class="text-base sm:text-lg leading-relaxed text-gray-800">
+            MetroNotes is a student-built platform created to make academic life
+            easier for students at Metropolitan University. We believe in open
+            collaboration and easy access to educational resources.
+          </p>
+          <p class="mt-6 text-base sm:text-lg leading-relaxed text-gray-800">
+            Whether you're preparing for exams or organizing class notes,
+            MetroNotes supports you with intuitive design, department-based
+            organization, and a smooth upload system. We aim to make studying
+            collaborative, accessible, and efficient.
+          </p>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section class="pb-16 px-6 sm:px-10" id="team">
+        <div class="max-w-7xl mx-auto text-center">
+          <h3 class="text-2xl sm:text-3xl font-bold mb-12">Meet the Team</h3>
+          <div class="grid gap-10 sm:grid-cols-2">
+            <!-- Team Member 1 -->
+            <div
+              class="bg-gradient-to-r from-blue-200 via-blue-500 to-blue-900 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-red-600"
+            >
+              <a
+                href="https://github.com/findmariammariaa"
+                target="_blank"
+                class="block mb-4"
+              >
+                <img
+                  src="https://avatars.githubusercontent.com/u/125682032?v=4"
+                  alt="John Doe"
+                  class="w-60 h-60 mx-auto rounded-full border-4 border-indigo-300 hover:scale-105 transition duration-300"
+                />
+              </a>
+              <h4 class="text-lg font-semibold">Maria Akter Mariam</h4>
+              <p class="text-sm text-gray-600">Frontend Developer</p>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div
+              class="bg-gradient-to-r from-green-300 via-green-600 to-green-900 rounded-2xl shadow-xl p-6 hover:scale-[1.03] transition-transform duration-300 border-t-4 border-gray-600"
+            >
+              <a
+                href="https://github.com/Prattaymu10"
+                target="_blank"
+                class="block mb-4"
+              >
+                <img
+                  src="https://avatars.githubusercontent.com/u/209658487?v=4"
+                  alt="Prattay"
+                  class="w-60 h-60 mx-auto rounded-full border-4 border-indigo-300 hover:scale-105 transition duration-300"
+                />
+              </a>
+              <h4 class="text-lg font-semibold">Prattay S Rahan</h4>
+              <p class="text-sm text-gray-600">Backend Developer</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+  </body>
+  <!-- footer -->
+  <div id="footer"></div>
+  <script src="./index.js"></script>
+</html>

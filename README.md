@@ -19,19 +19,41 @@ It provides an easy-to-use platform for students to **upload, share, and access 
 ## 🛠 Tech Stack
 
 **Frontend:**  
-- HTML  - Tailwind CSS  - DaisyUI  - JavaScript  
+- HTML  
+- Tailwind CSS  
+- DaisyUI  
+- JavaScript  
 
 **Backend:**  
-- Node.js  - Express.js  - Multer  
+- Node.js  
+- Express.js  
+- Multer  
+- Axios  
 
 **Storage & Database:**  
-- Cloudinary (PDF storage)  - MongoDB (user info & metadata)  
+- Cloudinary (PDF storage)  
+- MongoDB (user info & metadata)  
 
 **Deployment:**  
 - Render  
+
 ---
+
+## 👉 Categorization
+- **Multer** → middleware library (backend, file uploads)  
+- **Express** → backend framework  
+- **Axios** → HTTP client library (frontend + backend)  
+
+---
+
+## 👩‍💻 Responsibilities
+- **Mariam** → Frontend, UI/UX, MongoDB setup, basic backend bug fixes  
+- **Prattay** → File upload, file storing, backend setup, Cloudinary setup  
+
+---
+
 ## 🎥 Demo Video  
-👉 [Watch Demo on YouTube](https://youtu.be/P8VTc6fmDIM))  
+👉 [Watch Demo on YouTube](https://youtu.be/P8VTc6fmDIM)  
 
 ---
 

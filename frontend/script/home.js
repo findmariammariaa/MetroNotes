@@ -218,15 +218,24 @@ function getDaysAgo(dateStr) {
           alt="Upload"
           class="w-10 h-10"
         />
-        <div>
-          <h3 class="text-lg font-semibold text-gray-800">
-            ${note.title}
-          </h3>
-          <p class="text-sm text-gray-600">Uploaded ${daysAgo}</p>
-          <a href="https://metronotes.onrender.com/uploads/${note.file}" 
-             class="text-blue-600 underline text-sm mt-2 inline-block" download>
-            Download
-          </a>
+        <div class="flex gap-4 text-sm">
+        <a 
+          href="https://metronotes.onrender.com/api/notes/view/${note._id}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
+        >
+          📄 <span>View</span>
+        </a>
+
+        <a 
+          href="https://metronotes.onrender.com/api/notes/download/${note._id}" 
+          target="_blank"
+          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
+        >
+          📥 <span>Download</span>
+        </a>
+
         </div>
       `;
 

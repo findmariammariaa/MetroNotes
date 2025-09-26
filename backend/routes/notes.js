@@ -73,6 +73,9 @@ router.post("/upload", auth, upload.single("file"), async (req, res) => {
         fileUrl: note.fileUrl,
         fileName: note.fileName,
         uploadedAt: note.createdAt,
+        uploaderName: note.uploaderName,
+        uploaderId: note.uploaderId,
+        downloadCount: note.downloadCount || 0,
       },
     });
   } catch (err) {
@@ -92,6 +95,8 @@ router.get("/download/:id", async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
     if (!note) return res.status(404).json({ message: "Note not found" });
+    note.downloadCount = (note.downloadCount || 0) + 1;
+    await note.save();
 
     const fileExtension =
       note.fileName.split(".").pop()?.toLowerCase() || "bin";

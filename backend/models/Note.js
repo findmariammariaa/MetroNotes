@@ -20,14 +20,7 @@ const NoteSchema = new mongoose.Schema(
     department: {
       type: String,
       required: true,
-      enum: [
-        "CSE",
-        "EEE",
-        "BBA",
-        "ENG",
-        "Law",
-        "SWE",
-      ],
+      enum: ["CSE", "EEE", "BBA", "ENG", "Law", "SWE"],
     },
     courseName: {
       type: String,
@@ -55,6 +48,11 @@ const NoteSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    // 👇 NEW FIELD
+    downloadCount: {
+      type: Number,
+      default: 0,
     },
   },
   {

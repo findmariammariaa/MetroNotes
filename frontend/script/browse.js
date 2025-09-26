@@ -1,22 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
   const departmentFilter = document.getElementById("filter-department");
-  // ✅ Read 'department' query param and set filter
-const params = new URLSearchParams(window.location.search);
-const departmentFromURL = params.get("department");
-
-if (departmentFromURL) {
-  departmentFilter.value = departmentFromURL;
-}
-
   const courseFilter = document.getElementById("filter-course");
   const searchInput = document.getElementById("filter-search");
   const notesGrid = document.getElementById("notes-grid");
+
+  // Read query parameters from URL
+  const params = new URLSearchParams(window.location.search);
+  const departmentFromURL = params.get("department");
+  const courseFromURL = params.get("courseName");
+  const searchFromURL = params.get("search");
+
+  if (departmentFromURL) departmentFilter.value = departmentFromURL;
+  if (courseFromURL) courseFilter.value = courseFromURL;
+  if (searchFromURL) searchInput.value = searchFromURL;
 
   // Listen for filter changes
   departmentFilter.addEventListener("change", fetchFilteredNotes);
   courseFilter.addEventListener("change", fetchFilteredNotes);
   searchInput.addEventListener("input", debounce(fetchFilteredNotes, 300));
 
+  // Fetch notes from API
   async function fetchFilteredNotes() {
     const department = departmentFilter.value;
     const courseName = courseFilter.value;
@@ -45,7 +48,6 @@ if (departmentFromURL) {
 
   function renderNotes(notes) {
     notesGrid.innerHTML = "";
-
     notes.forEach((note) => {
       const card = document.createElement("div");
       card.className =
@@ -53,46 +55,28 @@ if (departmentFromURL) {
 
       card.innerHTML = `
         <div class="mb-4">
-          <h2 class="text-2xl font-bold text-gray-800">${
-            note.courseName
-          }</h2>
-          <p class="text-sm text-gray-600">${note.courseCode} – ${
-        note.title
-      }</p>
-          <p class="text-sm text-gray-600">Department: <span class="font-medium text-gray-700">${
-            note.department
-          }</span></p>
+          <h2 class="text-2xl font-bold text-gray-800">${note.courseName}</h2>
+          <p class="text-sm text-gray-600">${note.courseCode} – ${note.title}</p>
+          <p class="text-sm text-gray-600">Department: <span class="font-medium text-gray-700">${note.department}</span></p>
         </div>
 
         <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
           <div>
             Uploaded by: 
             <span class="font-semibold text-gray-700">
-              ${note.uploader?.name || "Anonymous"} (${
-        note.uploader?.studentId || "N/A"
-      })
+              ${note.uploader?.name || "Anonymous"} (${note.uploader?.studentId || "N/A"})
             </span>
           </div>
         </div>
 
         <div class="flex gap-4 text-sm">
-        <a 
-          href="https://metronotes.onrender.com/api/notes/view/${note._id}" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
-        >
-          📄 <span>View</span>
-        </a>
+          <a href="https://metronotes.onrender.com/api/notes/view/${note._id}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition">
+            📄 <span>View</span>
+          </a>
 
-        <a 
-          href="https://metronotes.onrender.com/api/notes/download/${note._id}" 
-          target="_blank"
-          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
-        >
-          📥 <span>Download</span>
-        </a>
-
+          <a href="https://metronotes.onrender.com/api/notes/download/${note._id}" target="_blank" class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition">
+            📥 <span>Download</span>
+          </a>
         </div>
       `;
       notesGrid.appendChild(card);

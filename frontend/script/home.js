@@ -205,7 +205,6 @@ document
       const result = await response.json();
 
       if (response.ok) {
-        hideModalLoader();
         showToast("Note uploaded successfully!", "success");
         form.reset();
         document.getElementById("upload_modal").close();
@@ -217,6 +216,9 @@ document
       console.error(err);
       showToast("An unexpected error occurred.", "error");
     }
+    finally {
+      hideModalLoader();
+    } 
   });
 
   async function loadRecentNotes() {

@@ -4,13 +4,13 @@ function showLoader() {
   const loader = document.getElementById("global-loader");
   if (!loader) return;
   loader.classList.remove("opacity-0", "pointer-events-none");
-  loader.classList.add("opacity-100");
+  loader.classList.add("opacity-50");
 }
 
 function hideLoader() {
   const loader = document.getElementById("global-loader");
   if (!loader) return;
-  loader.classList.remove("opacity-100");
+  loader.classList.remove("opacity-50");
   loader.classList.add("opacity-0", "pointer-events-none");
 }
 

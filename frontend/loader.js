@@ -18,37 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
   load("header", "/components/header.html", () => {
     const path = window.location.pathname;
 
-    const token = localStorage.getItem("token");
-    const signUpBtn = document.querySelector("#header .signup-btn");
-    const loginBtn = document.querySelector("#header .login-btn");
+    // === PAGE-SPECIFIC TWEAKS ===
 
-    if (token) {
-      // Hide signup/login
+    // Hide "Sign Up" on signup page
+    if (path.includes("signup.html")) {
+      const signUpBtn = document.querySelector("#header .signup-btn");
       if (signUpBtn) signUpBtn.style.display = "none";
-      if (loginBtn) loginBtn.style.display = "none";
-
-      // Add logout button dynamically
-      let logoutBtn = document.querySelector("#header .logout-btn");
-      if (!logoutBtn) {
-        logoutBtn = document.createElement("button");
-        logoutBtn.className = "logout-btn px-4 py-2 bg-red-500 text-white rounded";
-        logoutBtn.innerText = "Logout";
-        document.querySelector("#header .nav-buttons")?.appendChild(logoutBtn);
-      }
-
-      logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("token");
-        window.location.reload();
-      });
-    } else {
-      // Show signup/login if not logged in
-      if (signUpBtn) signUpBtn.style.display = "inline-block";
-      if (loginBtn) loginBtn.style.display = "inline-block";
     }
 
-    // === PAGE-SPECIFIC TWEAKS ===
-    if (path.includes("signup.html") && signUpBtn) signUpBtn.style.display = "none";
-    if (path.includes("login.html") && loginBtn) loginBtn.style.display = "none";
+    // Hide "Login" on login page
+    if (path.includes("login.html")) {
+      const loginBtn = document.querySelector("#header .login-btn");
+      if (loginBtn) loginBtn.style.display = "none";
+    }
   });
 
   // === FOOTER LOADER ===

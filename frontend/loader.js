@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   load("header", "/components/header.html", () => {
     const path = window.location.pathname;
 
-    // === PAGE-SPECIFIC TWEAKS ===
-
     // Hide "Sign Up" on signup page
     if (path.includes("signup.html")) {
       const signUpBtn = document.querySelector("#header .signup-btn");
@@ -32,7 +30,33 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginBtn) loginBtn.style.display = "none";
     }
 
+    // === SESSION LOGIC ===
+    // Example: check if "userSession" exists in localStorage
+    const userSession = localStorage.getItem("userSession"); // Or fetch from cookie/API
+
+    const signUpBtn = document.querySelector("#header .signup-btn");
+    const loginBtn = document.querySelector("#header .login-btn");
     
+    if (userSession) {
+      // User is logged in → hide sign up/login, show logout
+      if (signUpBtn) signUpBtn.style.display = "none";
+      if (loginBtn) loginBtn.style.display = "none";
+
+      // Create Logout button dynamically
+      let logoutBtn = document.querySelector("#header .logout-btn");
+      if (!logoutBtn) {
+        logoutBtn = document.createElement("button");
+        logoutBtn.className = "logout-btn px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600";
+        logoutBtn.innerText = "Logout";
+        document.querySelector("#header .nav-buttons")?.appendChild(logoutBtn);
+      }
+
+      // Logout click handler
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("userSession"); // Clear session
+        window.location.reload(); // Reload page to show login/signup again
+      });
+    }
   });
 
   // === FOOTER LOADER ===

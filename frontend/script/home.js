@@ -1,79 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const notesGrid = document.getElementById("notes-grid"); 
-  const recentUploads = document.getElementById("recent-uploads"); 
+  const notesGrid = document.getElementById("notes-grid"); // Featured
+  const recentUploads = document.getElementById("recent-uploads"); // Recently Uploaded
 
-  // === SESSION LOGIC ===
-  const token = localStorage.getItem("token");
-
-  async function handleSession() {
-    const header = document.getElementById("header");
-    if (!header) return;
-
-    const signUpBtn = header.querySelector(".signup-btn");
-    const loginBtn = header.querySelector(".login-btn");
-
-    if (token) {
-      // Hide signup/login
-      if (signUpBtn) signUpBtn.style.display = "none";
-      if (loginBtn) loginBtn.style.display = "none";
-
-      // Add logout button if not already present
-      let logoutBtn = header.querySelector(".logout-btn");
-      if (!logoutBtn) {
-        logoutBtn = document.createElement("button");
-        logoutBtn.className =
-          "logout-btn px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-2";
-        logoutBtn.innerText = "Logout";
-        header.querySelector(".nav-buttons")?.appendChild(logoutBtn);
-      }
-
-      // Logout click handler
-      logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("token");
-        window.location.href = "../index.html"; // redirect to home/index
-      });
-    } else {
-      // Not logged in → show signup/login buttons
-      if (signUpBtn) signUpBtn.style.display = "inline-block";
-      if (loginBtn) loginBtn.style.display = "inline-block";
-    }
-  }
-
-  // === HEADER LOADER ===
-  const loadHeader = async () => {
-    const el = document.getElementById("header");
-    if (!el) return;
-
-    try {
-      const res = await fetch("/components/header.html");
-      const html = await res.text();
-      el.innerHTML = html;
-
-      // Handle signup/login/logout visibility
-      handleSession();
-    } catch (err) {
-      console.error("Failed to load header:", err);
-    }
-  };
-
-  // === FOOTER LOADER ===
-  const loadFooter = async () => {
-    const el = document.getElementById("footer");
-    if (!el) return;
-    try {
-      const res = await fetch("/components/footer.html");
-      const html = await res.text();
-      el.innerHTML = html;
-    } catch (err) {
-      console.error("Failed to load footer:", err);
-    }
-  };
-
-  // Load header/footer
-  loadHeader();
-  loadFooter();
-
-  // ================== Notes Loading & Upload Logic ==================
   async function loadNotes() {
     try {
       const response = await fetch("https://metronotes.onrender.com/api/notes");
@@ -88,21 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
         .sort((a, b) => (b.downloadCount || 0) - (a.downloadCount || 0))
         .slice(0, 6);
 
-      recentNotes.forEach((note) => {
+      // Recently Uploaded section
+      recentNotes.forEach(note => {
         const card = createNoteCard(note, { showDownloads: false, showUploadedDate: true });
         recentUploads.appendChild(card);
       });
 
-      mostDownloadedNotes.forEach((note) => {
+      // Featured section
+      mostDownloadedNotes.forEach(note => {
         const card = createNoteCard(note, { showDownloads: true, showUploadedDate: false });
         notesGrid.appendChild(card);
       });
-    } catch (err) {
-      console.error("Failed to load notes:", err);
+
+    } catch (error) {
+      console.error("Failed to load notes:", error);
     }
   }
 
-  function createNoteCard(note, { showDownloads, showUploadedDate }) {
+  function createNoteCard(note, { showDownloads, showUploadedDate }){
     const daysAgo = getDaysAgo(note.createdAt);
     const card = document.createElement("div");
     card.className =
@@ -122,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </p>
 
       <div class="text-sm">
-        ${showDownloads ? `<span>📥 ${note.downloadCount || 0} Downloads</span>` : ""}
+        ${showDownloads ? `<span>📥 ${note.downloadCount || 0} Downloads</span>` : "<span></span>"}
         ${showUploadedDate ? `<span class="text-gray-500">Uploaded ${daysAgo}</span>` : ""}
       </div>
 
@@ -144,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         >
           📥 <span>Download</span>
         </a>
+
         </div>
       </div>
     `;
@@ -151,14 +83,196 @@ document.addEventListener("DOMContentLoaded", () => {
     return card;
   }
 
-  function getDaysAgo(dateStr) {
-    const createdDate = new Date(dateStr);
-    const now = new Date();
-    const diffTime = Math.abs(now - createdDate);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays === 0 ? "today" : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+
+function getDaysAgo(dateStr) {
+  const createdDate = new Date(dateStr);
+  const now = new Date();
+  const diffTime = Math.abs(now - createdDate);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays === 0 ? "today" : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+}
+
+  loadNotes();
+
+  
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    // Not logged in, redirect to login
+    window.location.href = "../others/login.html";
+    return;
   }
 
-  // Load notes initially
-  loadNotes();
+  fetch("https://metronotes.onrender.com/api/auth/profile", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((user) => {
+      console.log("Logged in user:", user);
+    })
+    .catch((err) => {
+      console.error("Profile fetch failed", err);
+      localStorage.removeItem("token");
+      window.location.href = "../others/login.html";
+    });
+  console.log(logoutBtn);
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("token"); // Remove JWT token
+      window.location.href = "../index.html"; // Redirect to login page
+    });
+  }
+  document
+    .getElementById("uploadForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+      console.log("Upload form submitted");
+      const form = e.target;
+      const formData = new FormData();
+
+      formData.append(
+        "uploaderName",
+        form.querySelector('input[name="uploaderName"]').value
+      );
+      formData.append(
+        "uploaderId",
+        form.querySelector('input[name="uploaderId"]').value
+      );
+      formData.append(
+        "department",
+        form.querySelector('select[name="department"]').value
+      );
+      formData.append(
+        "courseName",
+        form.querySelector('input[name="courseName"]').value
+      );
+      formData.append(
+        "courseCode",
+        form.querySelector('input[name="courseCode"]').value
+      );
+      formData.append(
+        "file",
+        form.querySelector('input[name="file"]').files[0]
+      );
+      formData.append("title", form.querySelector('input[name="title"]').value); // text
+
+      try {
+        const response = await fetch("https://metronotes.onrender.com/api/notes/upload", {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          showToast("Note uploaded successfully!", "success");
+          form.reset();
+          document.getElementById("upload_modal").close();
+          loadNotes(); // Optional: reload recently uploaded notes
+        } else {
+          showToast("Upload failed: " + result.message, "error");
+
+        }
+      } catch (err) {
+        console.error(err);
+        showToast("An unexpected error occurred.", "error");
+      }
+    });
+    async function loadRecentNotes() {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await fetch("https://metronotes.onrender.com/api/notes/recent", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const notes = await response.json();
+
+    if (!response.ok) {
+      throw new Error(notes.message || "Failed to load notes");
+    }
+
+    const container = document.getElementById("recentNotesGrid");
+
+    container.innerHTML = ""; // Clear previous static items
+
+    notes.forEach((note) => {
+      const noteCard = document.createElement("div");
+      noteCard.className =
+        "bg-white border rounded-lg p-6 shadow hover:shadow-lg transition-all flex items-start space-x-4";
+
+      const daysAgo = getDaysAgo(note.createdAt);
+
+      noteCard.innerHTML = `
+        <img
+          src="https://img.icons8.com/fluency/48/upload.png"
+          alt="Upload"
+          class="w-10 h-10"
+        />
+        <div class="flex gap-4 text-sm">
+        <a 
+          href="https://metronotes.onrender.com/api/notes/view/${note._id}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
+        >
+          📄 <span>View</span>
+        </a>
+
+        <a 
+          href="https://metronotes.onrender.com/api/notes/download/${note._id}" 
+          target="_blank"
+          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
+        >
+          📥 <span>Download</span>
+        </a>
+
+        </div>
+      `;
+
+      container.appendChild(noteCard);
+    });
+  } catch (err) {
+    console.error("Error loading recent notes:", err);
+    
+  }
+}
+
+function showToast(message, type = "success") {
+  const toastContainer = document.getElementById("toast");
+
+  const bg =
+    type === "error"
+      ? "bg-red-500"
+      : type === "success"
+      ? "bg-green-600"
+      : "bg-gray-700";
+
+  const toast = document.createElement("div");
+  toast.className = `alert ${bg} text-white px-4 py-2 rounded shadow mb-2 font-semibold`;
+  toast.innerText = message;
+
+  toastContainer.appendChild(toast);
+
+  // Auto-remove after 3 seconds
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+}
+  document.querySelectorAll(".dept-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const selectedDept = btn.getAttribute("data-dept");
+      // Redirect to browse page with department filter
+      window.location.href = `../others/browse.html?department=${encodeURIComponent(selectedDept)}`;
+    });
+  });
 });

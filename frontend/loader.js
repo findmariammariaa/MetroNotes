@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const loginBtn = document.querySelector("#header .login-btn");
       if (loginBtn) loginBtn.style.display = "none";
     }
+
+    
   });
 
   // === FOOTER LOADER ===

@@ -70,7 +70,6 @@ function hideLoader() {
       errorBox.textContent = data.message || "Signup failed.";
       return;
     }
-    hideLoader();
 
     showToast("Signup successful!", "success");
 
@@ -80,6 +79,9 @@ function hideLoader() {
   } catch (err) {
     console.error(err);
     errorBox.textContent = "Something went wrong. Please try again later.";
+  }
+  finally {
+    hideLoader();
   }
 });
 

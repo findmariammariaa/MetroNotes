@@ -181,6 +181,7 @@ document
     formData.append("title", form.querySelector('input[name="title"]').value); // text
 
     try {
+      showModalLoader();
       const response = await fetch(
         "https://metronotes.onrender.com/api/notes/upload",
         {
@@ -195,6 +196,7 @@ document
       const result = await response.json();
 
       if (response.ok) {
+        hideModalLoader();
         showToast("Note uploaded successfully!", "success");
         form.reset();
         document.getElementById("upload_modal").close();

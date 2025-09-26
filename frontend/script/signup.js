@@ -35,6 +35,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   }
 
   try {
+    showLoader();
     const response = await fetch("https://metronotes.onrender.com/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -53,6 +54,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
       errorBox.textContent = data.message || "Signup failed.";
       return;
     }
+    hideLoader();
 
     showToast("Signup successful!", "success");
 

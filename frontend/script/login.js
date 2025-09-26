@@ -6,6 +6,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const password = e.target.password.value;
 
   try {
+    showLoader();
     const response = await fetch("https://metronotes.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -18,6 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     // Save the token in localStorage
     localStorage.setItem("token", data.token);
     window.location.href = "../home.html";
+    hideLoader();
     showToast("Login successful!", "success");
 
   } catch (err) {

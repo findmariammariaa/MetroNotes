@@ -35,4 +35,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // === FOOTER LOADER ===
   load("footer", "/components/footer.html");
+  // Loader functions
+function showLoader() {
+  const loader = document.getElementById("global-loader");
+  if (!loader) return;
+  loader.classList.remove("opacity-0", "pointer-events-none");
+  loader.classList.add("opacity-100");
+}
+
+function hideLoader() {
+  const loader = document.getElementById("global-loader");
+  if (!loader) return;
+  loader.classList.remove("opacity-100");
+  loader.classList.add("opacity-0", "pointer-events-none");
+}
+const modalLoader = document.getElementById("modal-loader");
+
+function showModalLoader() {
+  if (modalLoader) modalLoader.classList.remove("hidden");
+}
+
+function hideModalLoader() {
+  if (modalLoader) modalLoader.classList.add("hidden");
+}
+
 });

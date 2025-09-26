@@ -1,5 +1,21 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+    // Loader functions
+function showLoader() {
+  const loader = document.getElementById("global-loader");
+  if (!loader) return;
+  loader.classList.remove("opacity-0", "pointer-events-none");
+  loader.classList.add("opacity-100");
+}
+
+function hideLoader() {
+  const loader = document.getElementById("global-loader");
+  if (!loader) return;
+  loader.classList.remove("opacity-100");
+  loader.classList.add("opacity-0", "pointer-events-none");
+}
+
+
 
   const emailOrId = loginForm.emailOrId.value.trim();
 

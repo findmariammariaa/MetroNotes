@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const modalLoader = document.getElementById("modal-loader");
+
+function showModalLoader() {
+  if (modalLoader) modalLoader.classList.remove("hidden");
+}
+
+function hideModalLoader() {
+  if (modalLoader) modalLoader.classList.add("hidden");
+}
   const notesGrid = document.getElementById("notes-grid"); // Featured
   const recentUploads = document.getElementById("recent-uploads"); // Recently Uploaded
 

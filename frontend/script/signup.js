@@ -1,4 +1,20 @@
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
+    // Loader functions
+function showLoader() {
+  const loader = document.getElementById("global-loader");
+  if (!loader) return;
+  loader.classList.remove("opacity-0", "pointer-events-none");
+  loader.classList.add("opacity-100");
+}
+
+function hideLoader() {
+  const loader = document.getElementById("global-loader");
+  if (!loader) return;
+  loader.classList.remove("opacity-100");
+  loader.classList.add("opacity-0", "pointer-events-none");
+}
+
+
   e.preventDefault();
 
   const form = e.target;

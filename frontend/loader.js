@@ -18,45 +18,37 @@ document.addEventListener("DOMContentLoaded", () => {
   load("header", "/components/header.html", () => {
     const path = window.location.pathname;
 
-    // Hide "Sign Up" on signup page
-    if (path.includes("signup.html")) {
-      const signUpBtn = document.querySelector("#header .signup-btn");
-      if (signUpBtn) signUpBtn.style.display = "none";
-    }
-
-    // Hide "Login" on login page
-    if (path.includes("login.html")) {
-      const loginBtn = document.querySelector("#header .login-btn");
-      if (loginBtn) loginBtn.style.display = "none";
-    }
-
-    // === SESSION LOGIC ===
-    // Example: check if "userSession" exists in localStorage
-    const userSession = localStorage.getItem("userSession"); // Or fetch from cookie/API
-
+    const token = localStorage.getItem("token");
     const signUpBtn = document.querySelector("#header .signup-btn");
     const loginBtn = document.querySelector("#header .login-btn");
-    
-    if (userSession) {
-      // User is logged in → hide sign up/login, show logout
+
+    if (token) {
+      // Hide signup/login
       if (signUpBtn) signUpBtn.style.display = "none";
       if (loginBtn) loginBtn.style.display = "none";
 
-      // Create Logout button dynamically
+      // Add logout button dynamically
       let logoutBtn = document.querySelector("#header .logout-btn");
       if (!logoutBtn) {
         logoutBtn = document.createElement("button");
-        logoutBtn.className = "logout-btn px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600";
+        logoutBtn.className = "logout-btn px-4 py-2 bg-red-500 text-white rounded";
         logoutBtn.innerText = "Logout";
         document.querySelector("#header .nav-buttons")?.appendChild(logoutBtn);
       }
 
-      // Logout click handler
       logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("userSession"); // Clear session
-        window.location.reload(); // Reload page to show login/signup again
+        localStorage.removeItem("token");
+        window.location.reload();
       });
+    } else {
+      // Show signup/login if not logged in
+      if (signUpBtn) signUpBtn.style.display = "inline-block";
+      if (loginBtn) loginBtn.style.display = "inline-block";
     }
+
+    // === PAGE-SPECIFIC TWEAKS ===
+    if (path.includes("signup.html") && signUpBtn) signUpBtn.style.display = "none";
+    if (path.includes("login.html") && loginBtn) loginBtn.style.display = "none";
   });
 
   // === FOOTER LOADER ===

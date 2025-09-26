@@ -156,20 +156,21 @@ document
     const form = e.target;
     const formData = new FormData();
 
-    // Auto-fill uploader info from session/localStorage if hidden
-    const uploaderNameInput = form.querySelector('input[name="uploaderName"]');
-    const uploaderIdInput = form.querySelector('input[name="uploaderId"]');
-
-    // Only fill if empty
-    if (uploaderNameInput && !uploaderNameInput.value) {
-      uploaderNameInput.value = sessionStorage.getItem("name") || "Anonymous";
-    }
-    if (uploaderIdInput && !uploaderIdInput.value) {
-      uploaderIdInput.value = sessionStorage.getItem("academicId") || "";
+        // Get logged-in user's info from profile
+    const token = localStorage.getItem("token");
+    let user;
+    if (token) {
+      const res = await fetch("https://metronotes.onrender.com/api/auth/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      user = await res.json();
     }
 
-    formData.append("uploaderName", uploaderNameInput.value);
-    formData.append("uploaderId", uploaderIdInput.value);
+    // Append Name and ID manually
+    if (user) {
+      formData.append("uploaderName", user.name);
+      formData.append("uploaderId", user.studentId);
+    }
      formData.append(
       "department",
       form.querySelector('select[name="department"]').value

@@ -58,9 +58,24 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="text-sm text-gray-600 mt-4">
-        <div class="space-x-3 flex justify-between items-center">
-          <a href="${note.fileUrl}.pdf?fl_attachment=false" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">📄 View</a>
-          <a href="${note.fileUrl}?fl_attachment=true" download class="text-blue-600 hover:underline">⬇️ Download</a>
+        <div class="flex gap-4 text-sm">
+        <a 
+          href="https://metronotes.onrender.com/api/notes/view/${note._id}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
+        >
+          📄 <span>View</span>
+        </a>
+
+        <a 
+          href="https://metronotes.onrender.com/api/notes/download/${note._id}" 
+          target="_blank"
+          class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
+        >
+          📥 <span>Download</span>
+        </a>
+
         </div>
       </div>
     `;
